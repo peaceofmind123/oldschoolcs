@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import "katex/dist/katex.min.css";
 import "./globals.css";
+import ThemeRegistry from "@/lib/mui/ThemeRegistry";
 
 export const metadata = {
 	title: "OldSchool CS",
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<body>
-				{children}
+				<ThemeRegistry>
+					{children}
+				</ThemeRegistry>
 			</body>
 		</html>
 	);
