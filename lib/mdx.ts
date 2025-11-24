@@ -3,9 +3,8 @@ import path from "node:path";
 import matter from "gray-matter";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
-import type { ComponentType } from "react";
+import type { ReactElement } from "react";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
@@ -41,7 +40,7 @@ export async function getAllPostsMeta(): Promise<PostMeta[]> {
 
 export async function getPostBySlug(slug: string): Promise<{
 	meta: PostMeta;
-	Content: ComponentType;
+	Content: ReactElement;
 }> {
 	const full = path.join(POSTS_DIR, `${slug}.mdx`);
 	const raw = await fs.readFile(full, "utf8");
@@ -60,17 +59,7 @@ export async function getPostBySlug(slug: string): Promise<{
 			mdxOptions: {
 				remarkPlugins: [remarkMath],
 				rehypePlugins: [
-					rehypeKatex,
-					[
-						rehypePrettyCode,
-						{
-							theme: {
-								dark: "github-dark",
-								light: "github-light"
-							},
-							keepBackground: false
-						}
-					]
+					rehypeKatex
 				]
 			}
 		}
