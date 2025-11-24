@@ -1,165 +1,258 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
+
 import {
 	Box,
-	Breadcrumbs,
-	Button,
 	Chip,
 	Container,
-	Divider,
 	Grid,
-	Link as MuiLink,
+	IconButton,
+	InputAdornment,
+	MenuItem,
+	Pagination,
 	Stack,
-	Typography,
-	Card,
-	CardActionArea,
-	CardContent
+	TextField,
+	Typography
 } from "@mui/material";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import { NavBar } from "@/components/webinars/NavBar";
+import { UpcomingCard } from "@/components/webinars/UpcomingCard";
+import { WebinarCard } from "@/components/webinars/WebinarCard";
+import { CtaPanel } from "@/components/webinars/CtaPanel";
+import { SiteFooter } from "@/components/webinars/SiteFooter";
+
+const upcomingWebinars = [
+	{
+		id: 1,
+		tag: "Cost-Efficient QA",
+		title: "Reducing QA Costs with Automation",
+		description: "Learn how smart automation can simplify quality assurance cycles without compromising software releases.",
+		date: "Mar 23, 2024",
+		time: "09:00 AM PST",
+		speaker: {
+			name: "Adedayo Bernard",
+			role: "Principal QA Lead",
+			avatar: "/img2.jpg"
+		},
+		accentColor: "#d9f8f0",
+		background: "linear-gradient(135deg,#f9fffd,#e1f4f0)"
+	},
+	{
+		id: 2,
+		tag: "Machine Learning QA",
+		title: "The Future of QA with Machine Learning",
+		description: "Explore how machine learning creates always-on testing loops with proactive alerts, saving time and releases.",
+		date: "Mar 25, 2024",
+		time: "11:30 AM PST",
+		speaker: {
+			name: "Karissa Brown",
+			role: "Head of Automation",
+			avatar: "/img3.webp"
+		},
+		accentColor: "#efe7ff",
+		background: "linear-gradient(135deg,#fbf8ff,#ece8ff)"
+	}
+];
+
+const pastWebinars = [
+	{
+		id: 1,
+		tag: "Open Source QA",
+		title: "Exploring Open Source SoftQA Tools",
+		date: "Mar 4, 2024",
+		description: "Dive into modular QA stacks for modern teams and how they scale with small, remote squads.",
+		speaker: "Alex Jordan",
+		avatar: "/img1.jpg",
+		accent: "#e8f8f2"
+	},
+	{
+		id: 2,
+		tag: "100% Coverage",
+		title: "Achieving 100% Test Coverage",
+		date: "Mar 8, 2024",
+		description: "Pragmatic test coverage stories from enterprise QA leaders operating in regulated industries.",
+		speaker: "Mina Xu",
+		avatar: "/img4.jpg",
+		accent: "#fef1e0"
+	},
+	{
+		id: 3,
+		tag: "Secure Your Code",
+		title: "Enhancing Security in Automated Testing",
+		date: "Mar 12, 2024",
+		description: "Meet the secure testing playbook covering threat modeling for QA automation studios.",
+		speaker: "Carmen Luo",
+		avatar: "/img2.jpg",
+		accent: "#e4f1ff"
+	},
+	{
+		id: 4,
+		tag: "Continuous QA",
+		title: "Continuous Testing for DevOps Success",
+		date: "Mar 15, 2024",
+		description: "DevOps isn't continuous testing; it's de-risking releases. Discover metrics and reference stacks.",
+		speaker: "Noah Patel",
+		avatar: "/img3.webp",
+		accent: "#fdf4ff"
+	},
+	{
+		id: 5,
+		tag: "Zero Defects!",
+		title: "Achieving Zero Defects with QA Automation",
+		date: "Mar 18, 2024",
+		description: "Intelligent QA automation practices that help release faster and deliver software with fewer bugs.",
+		speaker: "Georgia Lee",
+		avatar: "/img4.jpg",
+		accent: "#fef6e5"
+	},
+	{
+		id: 6,
+		tag: "Scale QA Effortlessly",
+		title: "Building Scalable Testing Strategies",
+		date: "Mar 22, 2024",
+		description: "Learn where to begin when building a QA organization that scales with your product teams.",
+		speaker: "Marcus Silva",
+		avatar: "/img1.jpg",
+		accent: "#eaf0ff"
+	}
+];
 
 export default function HomePage() {
-	const posts = [
-		{ id: 1, title: "Interview with Photographer & UX Designer, Viola LeBlanc", img: "/img2.jpg" },
-		{ id: 2, title: "Improve Your Design Skills: Develop an \"Eye\" for Design", img: "/img3.webp" },
-		{ id: 3, title: "A Relentless Pursuit of Perfection in Product Design", img: "/img4.jpg" },
-		{ id: 4, title: "A Continually Unfolding History — Made by Hand", img: "/img1.jpg" },
-		{ id: 5, title: "How Remote Collaboration Makes Us Better Designers", img: "/img2.jpg" },
-		{ id: 6, title: "Best Books on Scaling Your Early-Stage Startup", img: "/img3.webp" },
-		{ id: 7, title: "How to Run a Successful Business With Your Partner", img: "/img4.jpg" },
-		{ id: 8, title: "Why Food Matters — Disease Prevention & Treatment", img: "/img1.jpg" },
-		{ id: 9, title: "Conversations with London Makr & Co.", img: "/img2.jpg" }
-	];
-
 	return (
-		<Container sx={{ py: { xs: 3, md: 6 } }}>
-			{/* Breadcrumbs */}
-			<Breadcrumbs aria-label="breadcrumb" separator="›" sx={{ fontSize: 13, mb: 1 }}>
-				<MuiLink href="#" underline="hover" color="text.secondary">
-					Resources
-				</MuiLink>
-				<MuiLink href="#" underline="hover" color="primary">
-					Design & Photography
-				</MuiLink>
-			</Breadcrumbs>
+		<>
+			<NavBar />
 
-			{/* Title + Description */}
-			<Typography variant="h3" component="h1" sx={{ fontWeight: 800, letterSpacing: "-.01em" }}>
-				Untitled Design & Photography Journal
-			</Typography>
-			<Typography sx={{ mt: 1.5 }} color="text.secondary">
-				The Untitled UI Journal features carefully selected good works from studios, designers, architects, photographers,
-				and creators from all around the globe. Subscribe for new posts in your inbox.
-			</Typography>
-
-			{/* Hero */}
-			<Box sx={{ mt: 3, borderRadius: 2, overflow: "hidden", border: 1, borderColor: "divider", position: "relative" }}>
-				<Image src="/img1.jpg" alt="" width={1600} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
-				{/* overlay gradient */}
+			<Box
+				component="section"
+				sx={{
+					background: "linear-gradient(180deg,#0b3d4d,#0a2c3d)",
+					color: "#f4fbfa",
+					pt: { xs: 6, md: 8 },
+					pb: { xs: 7, md: 10 },
+					borderBottomLeftRadius: { md: 1 },
+					borderBottomRightRadius: { md: 1 },
+					position: "relative",
+					overflow: "visible"
+				}}
+			>
 				<Box
 					sx={{
 						position: "absolute",
 						inset: 0,
-						background: "linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.25), rgba(0,0,0,0))"
+						backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+						backgroundSize: "120px 120px",
+						opacity: 0.2,
+						pointerEvents: "none",
+						borderBottomLeftRadius: { md: 1 },
+						borderBottomRightRadius: { md: 1 }
 					}}
 				/>
-				{/* caption */}
-				<Box sx={{ position: "absolute", left: 16, right: 16, bottom: 16, color: "#fff" }}>
-					<Typography variant="h5" sx={{ fontWeight: 700, textShadow: "0 1px 3px rgba(0,0,0,.4)" }}>
-						Sophia Mesabhi from Untitled Ventures on Sustainable and Profitable Growth & What We Can Learn From the
-						Gumroad Mess
-					</Typography>
-					<Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 1.5, opacity: 0.95, fontSize: 12 }}>
-						<Stack direction="row" alignItems="center" spacing={1}>
-							<Box
-								sx={{
-									width: 24,
-									height: 24,
-									borderRadius: "50%",
-									bgcolor: "rgba(255,255,255,.15)",
-									border: "1px solid rgba(255,255,255,.25)"
-								}}
-							/>
-							<span>Frankie Sullivan</span>
-						</Stack>
-						<Box sx={{ width: 4, height: 4, bgcolor: "rgba(255,255,255,.7)", borderRadius: "50%" }} />
-						<span>10 April 2025</span>
-						<Stack direction="row" spacing={1} sx={{ ml: "auto" }}>
-							<Chip label="Design" size="small" variant="outlined" sx={chipOverlay} />
-							<Chip label="Retail" size="small" variant="outlined" sx={chipOverlay} />
-							<Chip label="Interviews" size="small" variant="outlined" sx={chipOverlay} />
-							<Chip label="12 min read" size="small" variant="outlined" sx={chipOverlay} />
+				<Container sx={{ position: "relative" }}>
+					<Stack spacing={2} textAlign="center" maxWidth={720} mx="auto">
+						<Typography variant="overline" sx={{ letterSpacing: ".3em", color: "rgba(244,251,250,0.6)" }}>
+							Our webinar
+						</Typography>
+						<Typography variant="h3" fontWeight={700}>
+							Grow as a Developer with our Training Webinars
+						</Typography>
+						<Typography color="rgba(244,251,250,0.8)">
+							Free live training workshops, Monday to Friday, from the comfort of your own home. Let’s learn, grow, and build
+							together.
+						</Typography>
+					</Stack>
+
+					<Stack direction="row" alignItems="center" justifyContent="space-between" mt={6} mb={3}>
+						<Typography variant="h6" fontWeight={600}>
+							Upcoming
+						</Typography>
+						<Stack direction="row" spacing={1}>
+							<IconButton size="small" sx={{ border: "1px solid rgba(244,251,250,0.3)", color: "inherit" }}>
+								<ArrowBackRoundedIcon fontSize="small" />
+							</IconButton>
+							<IconButton size="small" sx={{ border: "1px solid rgba(244,251,250,0.3)", color: "inherit" }}>
+								<ArrowForwardRoundedIcon fontSize="small" />
+							</IconButton>
 						</Stack>
 					</Stack>
-				</Box>
+
+					<Grid container spacing={3}>
+						{upcomingWebinars.map((webinar) => (
+							<Grid key={webinar.id} item xs={12} md={6}>
+								<UpcomingCard {...webinar} />
+							</Grid>
+						))}
+					</Grid>
+				</Container>
 			</Box>
 
-			{/* Featured blog posts header */}
-			<Stack direction="row" alignItems="center" sx={{ mt: 5, mb: 2 }}>
-				<Typography variant="h6" sx={{ fontWeight: 700 }}>
-					Featured blog posts
-				</Typography>
-				<Box sx={{ ml: "auto" }}>
-					<Link href="/blog" passHref legacyBehavior>
-						<Button size="small" variant="outlined">View all posts</Button>
-					</Link>
-				</Box>
-			</Stack>
+			<Container sx={{ py: { xs: 6, md: 8 } }}>
+				<Stack spacing={1}>
+					<Typography variant="h4" fontWeight={700}>
+						Watch past webinars
+					</Typography>
+					<Typography color="text.secondary">
+						Instantly stream our best sessions and learn how modern QA teams collaborate, integrate AI and scale quality.
+					</Typography>
+				</Stack>
 
-			{/* Grid of posts */}
-			<Grid container spacing={2}>
-				{posts.map((p) => (
-					<Grid key={p.id} item xs={12} md={6} lg={4}>
-						<Card variant="outlined" sx={{ height: "100%" }}>
-							<CardActionArea component={Link} href="/blog/hello-world" sx={{ alignItems: "stretch" }}>
-								<Box sx={{ aspectRatio: "4 / 3", width: "100%", position: "relative" }}>
-									<Image src={p.img} alt="" fill style={{ objectFit: "cover" }} />
-								</Box>
-								<CardContent>
-									<Typography fontWeight={600} sx={{ mb: .5 }}>{p.title}</Typography>
-									<Typography variant="body2" color="text.secondary">
-										Sample excerpt. Replace with your MDX summaries.
-									</Typography>
-									<Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
-										<Typography variant="caption" color="text.secondary">By Demo Author</Typography>
-										<Divider flexItem orientation="vertical" />
-										<Typography variant="caption" color="text.secondary">Jan 9, 2025</Typography>
-									</Stack>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+				<Grid container spacing={2} mt={3} alignItems="center">
+					<Grid item xs={12} md={5}>
+						<TextField
+							fullWidth
+							size="small"
+							placeholder="Search webinars"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<SearchRoundedIcon fontSize="small" />
+									</InputAdornment>
+								)
+							}}
+						/>
 					</Grid>
-				))}
-			</Grid>
-
-			<Stack alignItems="center" sx={{ my: 3 }}>
-				<Button variant="outlined">Loading more…</Button>
-			</Stack>
-
-			{/* CTA section */}
-			<Box sx={{ border: 1, borderColor: "divider", borderRadius: 2, p: { xs: 3, md: 4 }, bgcolor: "grey.50" }}>
-				<Grid container spacing={2} alignItems="center">
-					<Grid item xs={12} md={8}>
-						<Typography variant="h6" sx={{ fontWeight: 700 }}>Let’s get started on something great</Typography>
-						<Typography color="text.secondary">Join over 4,000+ startups already growing with Untitled.</Typography>
+					<Grid item xs={6} md={3}>
+						<TextField select fullWidth size="small" defaultValue="recent" label="Sort by">
+							<MenuItem value="recent">Most recent</MenuItem>
+							<MenuItem value="popular">Most popular</MenuItem>
+							<MenuItem value="length">Shortest duration</MenuItem>
+						</TextField>
 					</Grid>
-					<Grid item xs={12} md={4} sx={{ textAlign: { xs: "left", md: "right" } }}>
-						<Button sx={{ mr: 1 }} variant="outlined">Learn more</Button>
-						<Link href="/blog" passHref legacyBehavior>
-							<Button variant="contained">Get started</Button>
-						</Link>
+					<Grid item xs={6} md={4}>
+						<TextField select fullWidth size="small" defaultValue="all" label="All categories">
+							<MenuItem value="all">All categories</MenuItem>
+							<MenuItem value="ai">AI testing</MenuItem>
+							<MenuItem value="automation">Automation</MenuItem>
+							<MenuItem value="security">Security</MenuItem>
+						</TextField>
 					</Grid>
 				</Grid>
-			</Box>
-		</Container>
+
+				<Stack direction="row" spacing={1.5} mt={3} flexWrap="wrap">
+					<Chip label="All" color="primary" sx={{ color: "#fff" }} />
+					<Chip label="AI Test Scripts" variant="outlined" />
+					<Chip label="Collaboration" variant="outlined" />
+					<Chip label="QA Solutions" variant="outlined" />
+					<Chip label="DevOps" variant="outlined" />
+				</Stack>
+
+				<Grid container spacing={3} mt={1}>
+					{pastWebinars.map((webinar) => (
+						<Grid key={webinar.id} item xs={12} md={6} lg={4}>
+							<WebinarCard {...webinar} />
+						</Grid>
+					))}
+				</Grid>
+
+				<Stack alignItems="center" mt={4}>
+					<Pagination count={3} color="primary" />
+				</Stack>
+
+				<CtaPanel />
+			</Container>
+
+			<SiteFooter />
+		</>
 	);
 }
-
-const chipOverlay = {
-	color: "#fff",
-	borderColor: "rgba(255,255,255,.35)",
-	bgcolor: "rgba(255,255,255,.12)",
-	"& .MuiChip-label": { px: 1 },
-	"&:hover": { borderColor: "rgba(255,255,255,.6)", bgcolor: "rgba(255,255,255,.18)" }
-} as const;
-
 
