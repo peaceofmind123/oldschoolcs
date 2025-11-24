@@ -1,0 +1,49 @@
+:root {
+:root {
+	color-scheme: light dark;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+	line-height: 1.6;
+}
+
+a {
+	color: #2563eb;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+.post-title {
+	font-size: 2rem;
+	font-weight: 700;
+	margin: 0 0 0.5rem 0;
+}
+
+.post-meta {
+	color: #6b7280;
+	margin-bottom: 2rem;
+}
+
+/* KaTeX block display tweak for better spacing */
+.katex-display {
+	margin: 1.25rem 0;
+	overflow-x: auto;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+

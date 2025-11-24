@@ -1,0 +1,37 @@
+{
+  "name": "oldschoolcs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+		"lint": "next lint",
+		"type-check": "tsc --noEmit",
+		"new:post": "node scripts/new-post.mjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+		"feed": "^4.2.2",
+    "next": "latest",
+    "next-mdx-remote": "^5.0.0",
+    "react": "latest",
+    "react-dom": "latest",
+		"rehype-pretty-code": "^0.14.0",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+		"autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+		"postcss": "latest",
+		"tailwindcss": "latest",
+		"@tailwindcss/typography": "latest",
+    "typescript": "latest"
+  }
+}
+
