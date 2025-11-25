@@ -32,14 +32,15 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
             <Box
                 sx={{
                     display: "grid",
-                    gridTemplateColumns: { xs: "1fr", md: "1fr 0.45fr" },
+                    gridTemplateColumns: { xs: "1fr", md: "1.1fr 0.9fr" },
+                    alignItems: "stretch",
                     gap: { xs: 2.5, md: 3.5 },
                     bgcolor: background,
                     p: { xs: 3, md: 4 }
                 }}
             >
-                <Box>
-                    <Typography variant="h5" fontWeight={600} sx={{ color: "#052e35", whiteSpace: "pre-line" }}>
+                <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 1.5 }}>
+                    <Typography variant="h4" fontWeight={600} sx={{ color: "#052e35", whiteSpace: "pre-line" }}>
                         {tag}
                     </Typography>
                     {categoryTag ? (
@@ -47,13 +48,13 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                             component="span"
                             sx={{
                                 display: "inline-flex",
-                                padding: "2px 14px",
+                                padding: "2px 12px",
                                 borderRadius: 1,
                                 fontSize: 12,
                                 fontWeight: 600,
+                                alignSelf: "flex-start",
                                 backgroundColor: "rgba(4,44,53,0.08)",
-                                color: "rgba(4,44,53,0.7)",
-                                mt: 2
+                                color: "rgba(4,44,53,0.7)"
                             }}
                         >
                             {categoryTag}
@@ -64,12 +65,18 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                     sx={{
                         position: "relative",
                         minHeight: 180,
+                        maxHeight: 220,
                         borderRadius: 1,
                         overflow: "hidden",
                         background: "linear-gradient(145deg,#7ac3e3,#2c819d)"
                     }}
                 >
-                    <Box component="img" src={coverImage} alt={speaker.name} sx={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <Box
+                        component="img"
+                        src={coverImage}
+                        alt={speaker.name}
+                        sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    />
                     <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.7))" }} />
                     <Box sx={{ position: "absolute", bottom: 12, left: 12, right: 12, color: "#fff" }}>
                         <Typography fontWeight={600}>{speaker.name}</Typography>

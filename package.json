@@ -16,6 +16,7 @@
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "feed": "^4.2.2",
+    "framer-motion": "^12.23.24",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "next-mdx-remote": "^5.0.0",

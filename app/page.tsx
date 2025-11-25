@@ -1,26 +1,12 @@
 "use client";
 
-import {
-	Box,
-	Chip,
-	Container,
-	Grid,
-	IconButton,
-	InputAdornment,
-	MenuItem,
-	Pagination,
-	Stack,
-	TextField,
-	Typography
-} from "@mui/material";
-import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { Box, Chip, Container, Grid, InputAdornment, MenuItem, Pagination, Stack, TextField, Typography } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { NavBar } from "@/components/webinars/NavBar";
-import { UpcomingCard } from "@/components/webinars/UpcomingCard";
 import { WebinarCard } from "@/components/webinars/WebinarCard";
 import { CtaPanel } from "@/components/webinars/CtaPanel";
 import { SiteFooter } from "@/components/webinars/SiteFooter";
+import { UpcomingCarousel } from "@/components/webinars/UpcomingCarousel";
 
 const upcomingWebinars = [
 	{
@@ -54,6 +40,38 @@ const upcomingWebinars = [
 		background: "linear-gradient(135deg,#f6f2ff,#ebe6ff)",
 		categoryTag: "#Automation",
 		coverImage: "/img3.webp"
+	},
+	{
+		id: 3,
+		tag: "AI Test\nScripts",
+		title: "Writing Test Scripts with AI Assistance",
+		description: "Learn how AI can help you generate and refine test cases for low effort, saving time and reducing defects.",
+		date: "Mar 27, 2024",
+		time: "02:00 PM PST",
+		speaker: {
+			name: "Lena Ortiz",
+			role: "AI QA Engineer",
+			avatar: "/img4.jpg"
+		},
+		background: "linear-gradient(135deg,#fef2f2,#fde5e5)",
+		categoryTag: "#Innovation",
+		coverImage: "/img4.jpg"
+	},
+	{
+		id: 4,
+		tag: "Collaborative\nQA",
+		title: "Bridging the Gap: Developers and Testers",
+		description: "Foster collaboration between development and QA to enhance software quality across the release pipeline.",
+		date: "Mar 29, 2024",
+		time: "10:00 AM PST",
+		speaker: {
+			name: "Deni Wilkinson",
+			role: "QA Director",
+			avatar: "/img1.jpg"
+		},
+		background: "linear-gradient(135deg,#f0f5ff,#d7e6ff)",
+		categoryTag: "#Collaboration",
+		coverImage: "/img1.jpg"
 	}
 ];
 
@@ -164,27 +182,7 @@ export default function HomePage() {
 						</Typography>
 					</Stack>
 
-					<Stack direction="row" alignItems="center" justifyContent="space-between" mt={6} mb={3}>
-						<Typography variant="h6" fontWeight={600}>
-							Upcoming
-						</Typography>
-						<Stack direction="row" spacing={1}>
-							<IconButton size="small" sx={{ border: "1px solid rgba(244,251,250,0.3)", color: "inherit" }}>
-								<ArrowBackRoundedIcon fontSize="small" />
-							</IconButton>
-							<IconButton size="small" sx={{ border: "1px solid rgba(244,251,250,0.3)", color: "inherit" }}>
-								<ArrowForwardRoundedIcon fontSize="small" />
-							</IconButton>
-						</Stack>
-					</Stack>
-
-					<Grid container spacing={3}>
-						{upcomingWebinars.map((webinar) => (
-							<Grid key={webinar.id} item xs={12} md={6}>
-								<UpcomingCard {...webinar} />
-							</Grid>
-						))}
-					</Grid>
+					<UpcomingCarousel items={upcomingWebinars} />
 				</Container>
 			</Box>
 
