@@ -25,7 +25,7 @@ import { SiteFooter } from "@/components/webinars/SiteFooter";
 const upcomingWebinars = [
 	{
 		id: 1,
-		tag: "Cost-Efficient QA",
+		tag: "Cost-\nEfficient QA",
 		title: "Reducing QA Costs with Automation",
 		description: "Learn how smart automation can simplify quality assurance cycles without compromising software releases.",
 		date: "Mar 23, 2024",
@@ -35,12 +35,13 @@ const upcomingWebinars = [
 			role: "Principal QA Lead",
 			avatar: "/img2.jpg"
 		},
-		accentColor: "#d9f8f0",
-		background: "linear-gradient(135deg,#f9fffd,#e1f4f0)"
+		background: "linear-gradient(135deg,#edeff0,#dbecea)",
+		categoryTag: "#Business",
+		coverImage: "/img2.jpg"
 	},
 	{
 		id: 2,
-		tag: "Machine Learning QA",
+		tag: "Machine\nLearning QA",
 		title: "The Future of QA with Machine Learning",
 		description: "Explore how machine learning creates always-on testing loops with proactive alerts, saving time and releases.",
 		date: "Mar 25, 2024",
@@ -50,8 +51,9 @@ const upcomingWebinars = [
 			role: "Head of Automation",
 			avatar: "/img3.webp"
 		},
-		accentColor: "#efe7ff",
-		background: "linear-gradient(135deg,#fbf8ff,#ece8ff)"
+		background: "linear-gradient(135deg,#f6f2ff,#ebe6ff)",
+		categoryTag: "#Automation",
+		coverImage: "/img3.webp"
 	}
 ];
 
