@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { UpcomingCard } from "./UpcomingCard";
 
 type UpcomingCarouselProps<T> = {
@@ -14,6 +14,20 @@ type UpcomingCarouselProps<T> = {
 };
 
 const MotionBox = motion(Box);
+const slideVariants = {
+    enter: (direction: number) => ({
+        x: direction > 0 ? "100%" : "-100%",
+        opacity: 0
+    }),
+    center: {
+        x: "0%",
+        opacity: 1
+    },
+    exit: (direction: number) => ({
+        x: direction > 0 ? "-100%" : "100%",
+        opacity: 0
+    })
+};
 
 export function UpcomingCarousel<T extends { id: number | string }>({
     items,
@@ -28,12 +42,14 @@ export function UpcomingCarousel<T extends { id: number | string }>({
         return chunked.length ? chunked : [[]];
     }, [items, itemsPerSlide]);
 
-    const [page, setPage] = useState(0);
+    const [state, setState] = useState({ page: 0, direction: 0 });
 
     const handlePaginate = (direction: number) => {
-        if (!slides.length) return;
-        const next = (page + direction + slides.length) % slides.length;
-        setPage(next);
+        if (slides.length <= 1) return;
+        setState((prev) => {
+            const nextPage = (prev.page + direction + slides.length) % slides.length;
+            return { page: nextPage, direction };
+        });
     };
 
     return (
@@ -64,39 +80,35 @@ export function UpcomingCarousel<T extends { id: number | string }>({
                 </Stack>
             </Stack>
 
-            <Box sx={{ overflow: "hidden" }}>
-                <MotionBox
-                    animate={{ x: `-${page * 100}%` }}
-                    transition={{ type: "spring", stiffness: 110, damping: 20 }}
-                    sx={{
-                        display: "flex",
-                        width: `${slides.length * 100}%`
-                    }}
-                >
-                    {slides.map((slideItems, slideIndex) => (
+            <Box sx={{ position: "relative", overflow: "hidden" }}>
+                <AnimatePresence initial={false} custom={state.direction}>
+                    <MotionBox
+                        key={state.page}
+                        custom={state.direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ x: { type: "spring", stiffness: 120, damping: 25 }, opacity: { duration: 0.2 } }}
+                        sx={{
+                            width: "100%"
+                        }}
+                    >
                         <Box
-                            key={slideIndex}
                             sx={{
-                                flex: "0 0 100%",
-                                px: 0
+                                display: "grid",
+                                gridTemplateColumns: { xs: "1fr", lg: "repeat(2, minmax(0, 1fr))" },
+                                gap: 3
                             }}
                         >
-                            <Box
-                                sx={{
-                                    display: "grid",
-                                    gridTemplateColumns: { xs: "1fr", lg: "repeat(2, minmax(0, 1fr))" },
-                                    gap: 3
-                                }}
-                            >
-                                {slideItems.map((item: any) => (
-                                    <Box key={item.id}>
-                                        <UpcomingCard {...item} />
-                                    </Box>
-                                ))}
-                            </Box>
+                            {slides[state.page].map((item: any) => (
+                                <Box key={item.id}>
+                                    <UpcomingCard {...item} />
+                                </Box>
+                            ))}
                         </Box>
-                    ))}
-                </MotionBox>
+                    </MotionBox>
+                </AnimatePresence>
             </Box>
         </Box>
     );
