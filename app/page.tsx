@@ -171,18 +171,18 @@ export default function HomePage() {
 				<Container sx={{ position: "relative" }}>
 					<Stack spacing={2} textAlign="center" maxWidth={720} mx="auto">
 						<Typography variant="overline" sx={{ letterSpacing: ".3em", color: "rgba(244,251,250,0.6)" }}>
-							Our webinar
+							Old School CS
 						</Typography>
 						<Typography variant="h3" fontWeight={700}>
-							Grow as a Developer with our Training Webinars
+							Computer Science & Engineering, explained clearly
 						</Typography>
 						<Typography color="rgba(244,251,250,0.8)">
-							Free live training workshops, Monday to Friday, from the comfort of your own home. Let’s learn, grow, and build
-							together.
+							Deep-dive essays, diagrams, and walkthroughs that turn notoriously difficult CS and engineering topics into friendly,
+							easy-to-digest lessons. Learn at your own pace, build intuition, and ship better systems.
 						</Typography>
 					</Stack>
 
-					<UpcomingCarousel items={upcomingWebinars} />
+					<UpcomingCarousel title="Featured" items={upcomingWebinars} />
 				</Container>
 			</Box>
 

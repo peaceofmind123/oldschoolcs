@@ -103,7 +103,7 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                 </Typography>
 
                 <Button variant="contained" color="primary" sx={{ alignSelf: "flex-start", mt: 1 }}>
-                    Register
+                    Learn
                 </Button>
             </Box>
         </Card>
