@@ -1,42 +1,80 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Breadcrumbs, Card, CardContent, Chip, Container, Divider, Stack, Typography } from "@mui/material";
+import {
+	Box,
+	Breadcrumbs,
+	Card,
+	CardContent,
+	Chip,
+	Container,
+	Divider,
+	Grid,
+	Link as MuiLink,
+	Stack,
+	Typography
+} from "@mui/material";
 
 const sections = [
 	{
-		title: "1. Information We Collect",
+		id: "collect",
+		title: "What personal information we collect",
 		body: [
-			"We only collect the information you voluntarily provide when you subscribe, enroll in lessons, leave comments, or contact support.",
-			"This may include your name, email address, payment details processed securely by our billing partners, and analytics data (page views, session duration) gathered via privacy-conscious tooling."
+			"We only collect the information you submit when you subscribe, enroll in lessons, comment, or contact support.",
+			"This includes your name, email, billing metadata (handled securely by our payment partners), and privacy-friendly analytics such as page views and session duration."
 		]
 	},
 	{
-		title: "2. How We Use Your Information",
+		id: "use",
+		title: "What we do with the personal information we collect",
 		body: [
-			"We send lesson updates, newsletters, community announcements, and respond to your support requests.",
+			"We send lesson updates, newsletters, community announcements, and respond to support requests.",
 			"Aggregated analytics help us understand which topics resonate so we can build better CS lessons. We never sell your data."
 		]
 	},
 	{
-		title: "3. Cookies & Analytics",
+		id: "disclose",
+		title: "When we disclose personal information",
+		body: ["We share data only with trusted vendors who enable billing, authentication, or analytics, and only for the purposes described here."]
+	},
+	{
+		id: "cookies",
+		title: "How we use cookies & technology",
 		body: [
-			"We use minimal, first-party cookies to remember preferences. We rely on privacy-first analytics (no cross-site tracking) to understand usage."
+			"We use first-party cookies to remember preferences and to keep you signed in. Our analytics tooling is privacy-first—no cross-site tracking."
 		]
 	},
 	{
-		title: "4. Data Retention & Security",
+		id: "security",
+		title: "Security",
 		body: [
-			"Lesson enrollments and account data are retained while you have an account. You can request deletion anytime.",
-			"We encrypt data in transit and at rest, and partner with industry-standard providers for billing and authentication."
+			"We encrypt data in transit and at rest, and partner with industry-standard infrastructure providers. Access to customer data is restricted to essential staff only."
 		]
 	},
 	{
-		title: "5. Contact",
+		id: "transfer",
+		title: "Transfer of information",
 		body: [
-			"Questions? Email us at ",
-			<Link href="mailto:hello@oldschoolcs.com">hello@oldschoolcs.com</Link>,
-			" and we’ll respond within 2 business days."
+			"We operate internationally and may store data in the United States or other regions with adequate protections. When we transfer data, we rely on standard contractual clauses or equivalent safeguards."
+		]
+	},
+	{
+		id: "links",
+		title: "Links to other websites",
+		body: [
+			"Some lessons reference external resources. We are not responsible for the privacy practices of those sites, so please review their policies as well."
+		]
+	},
+	{
+		id: "choices",
+		title: "Your choices",
+		body: ["You can update your profile, adjust email preferences, or delete your account at any time from your settings panel or by contacting support."]
+	},
+	{
+		id: "access",
+		title: "Accessing & correcting your information",
+		body: [
+			"Need a copy of your data or want to correct something? Email hello@oldschoolcs.com and we’ll respond within two business days."
 		]
 	}
 ];
@@ -63,22 +101,53 @@ export default function PrivacyPage() {
 
 						<Divider sx={{ my: 4 }} />
 
-						<Stack spacing={4}>
-							{sections.map((section) => (
-								<Box key={section.title}>
-									<Typography variant="h5" fontWeight={600}>
-										{section.title}
-									</Typography>
-									<Stack spacing={1.5} mt={1.5} color="text.secondary">
-										{section.body.map((paragraph, index) => (
-											<Typography key={index} component="div">
-												{paragraph}
+						<Grid container spacing={4}>
+							<Grid item xs={12} md={4}>
+								<Card variant="outlined" sx={{ position: "sticky", top: 24 }}>
+									<CardContent>
+										<Typography variant="subtitle1" fontWeight={700}>
+											Table of contents
+										</Typography>
+										<Divider sx={{ my: 2 }} />
+										<Stack spacing={1.25}>
+											{sections.map((section) => (
+										<MuiLink
+											key={section.id}
+											href={`#${section.id}`}
+											underline="hover"
+											color="text.secondary"
+											sx={{
+												fontSize: 14,
+												scrollBehavior: "smooth",
+												"&:hover": { color: "text.primary" }
+											}}
+										>
+											{section.title}
+										</MuiLink>
+											))}
+										</Stack>
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item xs={12} md={8}>
+								<Stack spacing={4}>
+									{sections.map((section) => (
+										<Box key={section.id} id={section.id}>
+											<Typography variant="h5" fontWeight={600}>
+												{section.title}
 											</Typography>
-										))}
-									</Stack>
-								</Box>
-							))}
-						</Stack>
+											<Stack spacing={1.5} mt={1.5} color="text.secondary">
+												{section.body.map((paragraph, index) => (
+													<Typography key={index} component="div">
+														{paragraph}
+													</Typography>
+												))}
+											</Stack>
+										</Box>
+									))}
+								</Stack>
+							</Grid>
+						</Grid>
 					</CardContent>
 				</Card>
 			</Container>
