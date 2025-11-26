@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Avatar, Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 
 type WebinarCardProps = {
@@ -57,7 +58,9 @@ export function WebinarCard({ tag, title, date, description, speaker, avatar, ac
 							{speaker}
 						</Typography>
 					</Stack>
-					<Button size="small">Open lesson</Button>
+					<Button component={Link} href="/lesson" size="small">
+						Open lesson
+					</Button>
 				</Stack>
 			</CardContent>
 		</Card>

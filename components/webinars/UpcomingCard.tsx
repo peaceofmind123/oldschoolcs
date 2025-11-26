@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
 
 type UpcomingCardProps = {
@@ -102,7 +103,7 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                     {description}
                 </Typography>
 
-                <Button variant="contained" color="primary" sx={{ alignSelf: "flex-start", mt: 1 }}>
+				<Button component={Link} href="/lesson" variant="contained" color="primary" sx={{ alignSelf: "flex-start", mt: 1 }}>
                     Learn
                 </Button>
             </Box>
