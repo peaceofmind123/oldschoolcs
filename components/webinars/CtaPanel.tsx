@@ -27,20 +27,21 @@ export function CtaPanel() {
 			<Container sx={{ position: "relative" }}>
 				<Stack spacing={2} maxWidth={560}>
 					<Typography variant="overline" sx={{ letterSpacing: ".2em", color: "rgba(244,251,250,0.7)" }}>
-						Ready to launch
+						Stay curious
 					</Typography>
 					<Typography variant="h4" fontWeight={700}>
-						Ready to turn your development innovation?
+						Get the Old School CS newsletter
 					</Typography>
 					<Typography color="rgba(244,251,250,0.75)">
-						Try and see the magic of SoftQA in action. Deliver unforgettable experiences with AI-powered QA testing.
+						Weekly breakdowns of tricky CS and engineering concepts, lab exercises, and reading lists delivered straight to your
+						inbox.
 					</Typography>
 					<Stack direction={{ xs: "column", sm: "row" }} spacing={2} pt={2}>
 						<Button variant="contained" color="secondary" size="large" sx={{ color: "secondary.contrastText" }}>
-							Get started
+							Subscribe free
 						</Button>
 						<Button variant="outlined" color="inherit" size="large">
-							Watch video
+							Preview an issue
 						</Button>
 					</Stack>
 				</Stack>

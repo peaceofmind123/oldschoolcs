@@ -57,7 +57,7 @@ export function WebinarCard({ tag, title, date, description, speaker, avatar, ac
 							{speaker}
 						</Typography>
 					</Stack>
-					<Button size="small">Read more</Button>
+					<Button size="small">Open lesson</Button>
 				</Stack>
 			</CardContent>
 		</Card>
