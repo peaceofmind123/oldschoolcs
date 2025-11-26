@@ -40,7 +40,7 @@ export function SiteFooter() {
 
 				<Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="space-between" alignItems="center">
 					<Typography variant="caption" color="rgba(255,255,255,0.6)">
-						© Copyright {new Date().getFullYear()} Old School CS. All rights reserved.
+						© {new Date().getFullYear()} Ashish Paudel. All rights reserved.
 					</Typography>
 					<Stack direction="row" spacing={1}>
 						<IconButton size="small" sx={{ color: "rgba(255,255,255,0.9)" }}>
