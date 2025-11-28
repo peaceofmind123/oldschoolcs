@@ -1,6 +1,7 @@
 "use client";
 
-import { Box, Chip, Container, InputAdornment, MenuItem, Pagination, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Chip, Container, InputAdornment, MenuItem, Pagination, Stack, TextField, Typography } from "@mui/material";
+import SouthIcon from "@mui/icons-material/South";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { NavBar } from "@/components/webinars/NavBar";
 import { WebinarCard } from "@/components/webinars/WebinarCard";
@@ -180,9 +181,23 @@ export default function HomePage() {
 							Deep-dive essays, diagrams, and walkthroughs that turn notoriously difficult CS and engineering topics into friendly,
 							easy-to-digest lessons. Learn at your own pace, build intuition, and ship better systems.
 						</Typography>
+						<Box sx={{ pt: 2 }}>
+							<Button
+								variant="contained"
+								color="secondary"
+								size="large"
+								endIcon={<SouthIcon sx={{ width: 18, height: 18 }} />}
+								sx={{ color: "#05262c", fontWeight: 600 }}
+								onClick={() => document.getElementById("featured-section")?.scrollIntoView({ behavior: "smooth" })}
+							>
+								Explore
+							</Button>
+						</Box>
 					</Stack>
 
-					<UpcomingCarousel title="Featured" items={upcomingWebinars} />
+					<Box id="featured-section">
+						<UpcomingCarousel title="Featured" items={upcomingWebinars} />
+					</Box>
 				</Container>
 			</Box>
 
