@@ -1,23 +1,12 @@
 import Link from "next/link";
 import { Box, Button, Card, Stack, Typography } from "@mui/material";
+import { Lesson } from "@/lib/lessons";
 
 type UpcomingCardProps = {
-    tag: string;
-    title: string;
-    description: string;
-    date: string;
-    time: string;
-    speaker: {
-        name: string;
-        role: string;
-        avatar: string;
-    };
-    background: string;
-    categoryTag?: string;
-    coverImage: string;
+	lesson: Lesson;
 };
 
-export function UpcomingCard({ tag, title, description, date, time, speaker, background, categoryTag, coverImage }: UpcomingCardProps) {
+export function UpcomingCard({ lesson }: UpcomingCardProps) {
     return (
         <Card
             sx={{
@@ -36,15 +25,15 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                     gridTemplateColumns: { xs: "1fr", md: "1.1fr 0.9fr" },
                     alignItems: "stretch",
                     gap: { xs: 2.5, md: 3.5 },
-                    bgcolor: background,
+                    bgcolor: "rgba(4, 44, 53, 0.03)",
                     p: { xs: 3, md: 4 }
                 }}
             >
-                <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 1.5 }}>
+				<Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 1.5 }}>
                     <Typography variant="h4" fontWeight={600} sx={{ color: "#052e35", whiteSpace: "pre-line" }}>
-                        {tag}
+						{lesson.tagline}
                     </Typography>
-                    {categoryTag ? (
+					{lesson.category ? (
                         <Box
                             component="span"
                             sx={{
@@ -55,10 +44,10 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                                 fontWeight: 600,
                                 alignSelf: "flex-start",
                                 backgroundColor: "rgba(4,44,53,0.08)",
-                                color: "rgba(4,44,53,0.7)"
+								color: "rgba(4,44,53,0.7)"
                             }}
                         >
-                            {categoryTag}
+							{lesson.category}
                         </Box>
                     ) : null}
                 </Box>
@@ -69,43 +58,35 @@ export function UpcomingCard({ tag, title, description, date, time, speaker, bac
                         maxHeight: 220,
                         borderRadius: 1,
                         overflow: "hidden",
-                        background: "linear-gradient(145deg,#7ac3e3,#2c819d)"
+						background: "linear-gradient(145deg,#7ac3e3,#2c819d)"
                     }}
                 >
-                    <Box
-                        component="img"
-                        src={coverImage}
-                        alt={speaker.name}
-                        sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                    />
+					<Box component="img" src={lesson.heroImage} alt={lesson.author.name} sx={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                     <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.7))" }} />
                     <Box sx={{ position: "absolute", bottom: 12, left: 12, right: 12, color: "#fff" }}>
-                        <Typography fontWeight={600}>{speaker.name}</Typography>
+						<Typography fontWeight={600}>{lesson.author.name}</Typography>
                         <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.8)" }}>
-                            {speaker.role}
+							{lesson.author.role}
                         </Typography>
                     </Box>
                 </Box>
             </Box>
 
             <Box sx={{ flexGrow: 1, bgcolor: "#fff", px: { xs: 3, md: 4 }, py: { xs: 3, md: 3.5 }, display: "flex", flexDirection: "column", gap: 1.5 }}>
-                <Stack direction="row" spacing={1.5} fontSize={14} color="rgba(5,46,53,0.7)">
-                    <span>{date}</span>
-                    <Box sx={{ width: 4, height: 4, bgcolor: "rgba(5,46,53,0.4)", borderRadius: "50%", alignSelf: "center" }} />
-                    <span>{time}</span>
-                </Stack>
-
+				<Typography fontSize={14} color="rgba(5,46,53,0.7)">
+					{lesson.metrics.lessons} lessons · {lesson.metrics.duration}
+				</Typography>
                 <Typography variant="h6" fontWeight={700}>
-                    {title}
+					{lesson.title}
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
-                    {description}
+					{lesson.summary}
                 </Typography>
 
-				<Button component={Link} href="/lesson" variant="contained" color="primary" sx={{ alignSelf: "flex-start", mt: 1 }}>
-                    Learn
-                </Button>
+				<Button component={Link} href={`/lessons/${lesson.slug}`} variant="contained" color="primary" sx={{ alignSelf: "flex-start", mt: 1 }}>
+					Learn
+				</Button>
             </Box>
         </Card>
     );

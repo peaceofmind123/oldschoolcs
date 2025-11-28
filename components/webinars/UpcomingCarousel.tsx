@@ -6,11 +6,12 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { AnimatePresence, motion } from "framer-motion";
 import { UpcomingCard } from "./UpcomingCard";
+import { Lesson } from "@/lib/lessons";
 
-type UpcomingCarouselProps<T> = {
-    items: T[];
-    title?: string;
-    itemsPerSlide?: number;
+type UpcomingCarouselProps = {
+	lessons: Lesson[];
+	title?: string;
+	itemsPerSlide?: number;
 };
 
 const MotionBox = motion(Box);
@@ -29,18 +30,14 @@ const slideVariants = {
     })
 };
 
-export function UpcomingCarousel<T extends { id: number | string }>({
-    items,
-    title = "Upcoming",
-    itemsPerSlide = 2
-}: UpcomingCarouselProps<T>) {
+export function UpcomingCarousel({ lessons, title = "Upcoming", itemsPerSlide = 2 }: UpcomingCarouselProps) {
     const slides = useMemo(() => {
-        const chunked: T[][] = [];
-        for (let i = 0; i < items.length; i += itemsPerSlide) {
-            chunked.push(items.slice(i, i + itemsPerSlide));
+		const chunked: Lesson[][] = [];
+		for (let i = 0; i < lessons.length; i += itemsPerSlide) {
+			chunked.push(lessons.slice(i, i + itemsPerSlide));
         }
         return chunked.length ? chunked : [[]];
-    }, [items, itemsPerSlide]);
+	}, [lessons, itemsPerSlide]);
 
     const [state, setState] = useState({ page: 0, direction: 0 });
 
@@ -101,9 +98,9 @@ export function UpcomingCarousel<T extends { id: number | string }>({
                                 gap: 3
                             }}
                         >
-                            {slides[state.page].map((item: any) => (
-                                <Box key={item.id}>
-                                    <UpcomingCard {...item} />
+							{slides[state.page].map((lesson) => (
+								<Box key={lesson.slug}>
+									<UpcomingCard lesson={lesson} />
                                 </Box>
                             ))}
                         </Box>

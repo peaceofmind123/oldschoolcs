@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { Avatar, Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
+import { Lesson } from "@/lib/lessons";
 
 type WebinarCardProps = {
-	tag: string;
-	title: string;
-	date: string;
-	description: string;
-	speaker: string;
-	avatar: string;
-	accent: string;
+	lesson: Lesson;
 };
 
-export function WebinarCard({ tag, title, date, description, speaker, avatar, accent }: WebinarCardProps) {
+export function WebinarCard({ lesson }: WebinarCardProps) {
 	return (
 		<Card
 			variant="outlined"
@@ -32,33 +27,33 @@ export function WebinarCard({ tag, title, date, description, speaker, avatar, ac
 						borderRadius: 999,
 						fontSize: 11,
 						fontWeight: 600,
-						backgroundColor: accent,
+						backgroundColor: "rgba(15,35,52,0.1)",
 						color: "#05262c"
 					}}
 				>
-					{tag}
+					{lesson.category}
 				</Box>
 
 				<Typography variant="h6" fontSize={19} fontWeight={600}>
-					{title}
+					{lesson.title}
 				</Typography>
 
 				<Typography variant="caption" color="text.secondary">
-					{date}
+					{lesson.metrics.lessons} lessons · {lesson.metrics.duration}
 				</Typography>
 
 				<Typography variant="body2" color="text.secondary" sx={{ flexGrow: 1 }}>
-					{description}
+					{lesson.summary}
 				</Typography>
 
 				<Stack direction="row" alignItems="center" justifyContent="space-between">
 					<Stack direction="row" spacing={1.2} alignItems="center">
-						<Avatar src={avatar} alt={speaker} sx={{ width: 36, height: 36 }} />
+						<Avatar src={lesson.author.avatar} alt={lesson.author.name} sx={{ width: 36, height: 36 }} />
 						<Typography fontSize={14} fontWeight={600}>
-							{speaker}
+							{lesson.author.name}
 						</Typography>
 					</Stack>
-					<Button component={Link} href="/lesson" size="small">
+					<Button component={Link} href={`/lessons/${lesson.slug}`} size="small">
 						Open lesson
 					</Button>
 				</Stack>

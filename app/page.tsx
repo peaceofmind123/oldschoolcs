@@ -8,136 +8,10 @@ import { WebinarCard } from "@/components/webinars/WebinarCard";
 import { CtaPanel } from "@/components/webinars/CtaPanel";
 import { SiteFooter } from "@/components/webinars/SiteFooter";
 import { UpcomingCarousel } from "@/components/webinars/UpcomingCarousel";
+import { getBrowseLessons, getFeaturedLessons } from "@/lib/lessons";
 
-const upcomingWebinars = [
-	{
-		id: 1,
-		tag: "Graph Theory\nPlaygrounds",
-		title: "Visualizing Network Flows with Residual Graphs",
-		description: "Step through max-flow and min-cut algorithms using layered diagrams, animations, and real datasets.",
-		date: "Mar 23, 2024",
-		time: "09:00 AM PST",
-		speaker: {
-			name: "Nadia Mensah",
-			role: "Distributed Systems Researcher",
-			avatar: "/img2.jpg"
-		},
-		background: "linear-gradient(135deg,#edeff0,#dbecea)",
-		categoryTag: "#Algorithms",
-		coverImage: "/img2.jpg"
-	},
-	{
-		id: 2,
-		tag: "Machine\nLearning Ops",
-		title: "Debugging Transformers Without Losing Your Mind",
-		description: "Use attention probes, gradient surgery, and evaluation harnesses to make sense of gigantic language models.",
-		date: "Mar 25, 2024",
-		time: "11:30 AM PST",
-		speaker: {
-			name: "Karissa Brown",
-			role: "ML Platform Lead",
-			avatar: "/img3.webp"
-		},
-		background: "linear-gradient(135deg,#f6f2ff,#ebe6ff)",
-		categoryTag: "#ML",
-		coverImage: "/img3.webp"
-	},
-	{
-		id: 3,
-		tag: "AI Tooling",
-		title: "Prompt Engineering for Systems Engineers",
-		description: "Harness LLM copilots to reason about capacity planning, network diagrams, and incident retros.",
-		date: "Mar 27, 2024",
-		time: "02:00 PM PST",
-		speaker: {
-			name: "Lena Ortiz",
-			role: "AI Infrastructure Engineer",
-			avatar: "/img4.jpg"
-		},
-		background: "linear-gradient(135deg,#fef2f2,#fde5e5)",
-		categoryTag: "#AI",
-		coverImage: "/img4.jpg"
-	},
-	{
-		id: 4,
-		tag: "Collaborative\nSystems",
-		title: "Bridging Software Architecture & Hardware Constraints",
-		description: "Learn the mental models that help teams design silicon-aware software for robotics and embedded systems.",
-		date: "Mar 29, 2024",
-		time: "10:00 AM PST",
-		speaker: {
-			name: "Deni Wilkinson",
-			role: "Hardware Systems Architect",
-			avatar: "/img1.jpg"
-		},
-		background: "linear-gradient(135deg,#f0f5ff,#d7e6ff)",
-		categoryTag: "#Systems",
-		coverImage: "/img1.jpg"
-	}
-];
-
-const pastWebinars = [
-	{
-		id: 1,
-		tag: "Compilers",
-		title: "Building a Register Allocator from Scratch",
-		date: "Mar 4, 2024",
-		description: "Follow live-coding notebooks that translate SSA graphs into efficient register assignments.",
-		speaker: "Alex Jordan",
-		avatar: "/img1.jpg",
-		accent: "#e8f8f2"
-	},
-	{
-		id: 2,
-		tag: "Security",
-		title: "Memory Safety Patterns for C Systems",
-		date: "Mar 8, 2024",
-		description: "Learn hardened allocator tricks, shadow stacks, and fuzzing strategies for legacy codebases.",
-		speaker: "Mina Xu",
-		avatar: "/img4.jpg",
-		accent: "#fef1e0"
-	},
-	{
-		id: 3,
-		tag: "AI Infra",
-		title: "Serving LLMs on Tiny GPUs",
-		date: "Mar 12, 2024",
-		description: "Quantization math, KV cache tricks, and routing layers to keep inference under budget.",
-		speaker: "Carmen Luo",
-		avatar: "/img2.jpg",
-		accent: "#e4f1ff"
-	},
-	{
-		id: 4,
-		tag: "Distributed Systems",
-		title: "Byzantine Fault Tolerance for Practitioners",
-		date: "Mar 15, 2024",
-		description: "Step-by-step derivations of PBFT along with visual timelines, failure stories, and code labs.",
-		speaker: "Noah Patel",
-		avatar: "/img3.webp",
-		accent: "#fdf4ff"
-	},
-	{
-		id: 5,
-		tag: "Data Systems",
-		title: "Columnar Storage Engines Explained",
-		date: "Mar 18, 2024",
-		description: "Understand vectorized execution with interactive whiteboard sessions and perf traces.",
-		speaker: "Georgia Lee",
-		avatar: "/img4.jpg",
-		accent: "#fef6e5"
-	},
-	{
-		id: 6,
-		tag: "Robotics",
-		title: "Control Theory Crash Course",
-		date: "Mar 22, 2024",
-		description: "Simulate PID loops, state-space models, and MPC pipelines using our sandboxed lab environment.",
-		speaker: "Marcus Silva",
-		avatar: "/img1.jpg",
-		accent: "#eaf0ff"
-	}
-];
+const featuredLessons = getFeaturedLessons();
+const browseLessons = getBrowseLessons(6);
 
 export default function HomePage() {
 	return (
@@ -196,7 +70,7 @@ export default function HomePage() {
 					</Stack>
 
 					<Box id="featured-section">
-						<UpcomingCarousel title="Featured" items={upcomingWebinars} />
+						<UpcomingCarousel title="Featured" lessons={featuredLessons} />
 					</Box>
 				</Container>
 			</Box>
@@ -261,9 +135,9 @@ export default function HomePage() {
 						gridTemplateColumns: { xs: "1fr", md: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" }
 					}}
 				>
-					{pastWebinars.map((webinar) => (
-						<Box key={webinar.id}>
-							<WebinarCard {...webinar} />
+					{browseLessons.map((lesson) => (
+						<Box key={lesson.slug}>
+							<WebinarCard lesson={lesson} />
 						</Box>
 					))}
 				</Box>
