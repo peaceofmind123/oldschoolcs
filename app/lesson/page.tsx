@@ -35,7 +35,6 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ShareIcon from "@mui/icons-material/Share";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import React from "react";
 
@@ -131,11 +130,8 @@ export default function LessonPage() {
 								Share
 							</Button>
 							<Button variant="contained" color="primary">
-								Enroll now
+								Begin lesson
 							</Button>
-							<IconButton>
-								<NotificationsNoneIcon />
-							</IconButton>
 						</Stack>
 					</Stack>
 
