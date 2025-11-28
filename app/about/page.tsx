@@ -47,7 +47,7 @@ export default function AboutPage() {
 						sx={{
 							display: "grid",
 							gap: { xs: 4, md: 6 },
-							gridTemplateColumns: { xs: "1fr", md: "1fr 0.9fr" },
+							gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1fr) 320px" },
 							alignItems: "center"
 						}}
 					>
@@ -88,10 +88,10 @@ export default function AboutPage() {
 									boxShadow: "0 40px 80px rgba(5, 14, 24, 0.8)",
 									border: "1px solid rgba(255,255,255,0.05)",
 									position: "relative",
-									minHeight: { xs: 320, md: 460 }
+									aspectRatio: "5 / 4"
 								}}
 							>
-								<Image src="/profile_photo_ashish.jpg" alt="Ashish Paudel" fill style={{ objectFit: "cover" }} />
+								<Image src="/profile_photo.jpg" alt="Ashish Paudel" fill style={{ objectFit: "contain" }} />
 							</Box>
 						</Box>
 					</Box>
