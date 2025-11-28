@@ -8,6 +8,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { NavBar } from "@/components/webinars/NavBar";
+import { SiteFooter } from "@/components/webinars/SiteFooter";
 
 const contactHighlights = [
 	{
@@ -192,6 +193,7 @@ export default function AboutPage() {
 					</Box>
 				</Container>
 			</Box>
+			<SiteFooter />
 		</Box>
 	);
 }
