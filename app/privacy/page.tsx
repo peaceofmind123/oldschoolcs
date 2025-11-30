@@ -1,19 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-	Box,
-	Breadcrumbs,
-	Card,
-	CardContent,
-	Chip,
-	Container,
-	Divider,
-	Grid,
-	Link as MuiLink,
-	Stack,
-	Typography
-} from "@mui/material";
+import { Box, Breadcrumbs, Card, CardContent, Chip, Container, Divider, Link as MuiLink, Stack, Typography } from "@mui/material";
 
 const sections = [
 	{
@@ -101,9 +89,16 @@ export default function PrivacyPage() {
 
 						<Divider sx={{ my: 4 }} />
 
-						<Grid container spacing={4}>
-							<Grid item xs={12} md={4}>
-								<Card variant="outlined" sx={{ position: "sticky", top: 24 }}>
+						<Box
+							sx={{
+								display: "grid",
+								gap: { xs: 3, md: 4 },
+								gridTemplateColumns: { xs: "1fr", md: "minmax(0, 320px) 1fr" },
+								alignItems: "start"
+							}}
+						>
+							<Box>
+								<Card variant="outlined" sx={{ position: { md: "sticky" }, top: 24 }}>
 									<CardContent>
 										<Typography variant="subtitle1" fontWeight={700}>
 											Table of contents
@@ -111,25 +106,25 @@ export default function PrivacyPage() {
 										<Divider sx={{ my: 2 }} />
 										<Stack spacing={1.25}>
 											{sections.map((section) => (
-										<MuiLink
-											key={section.id}
-											href={`#${section.id}`}
-											underline="hover"
-											color="text.secondary"
-											sx={{
-												fontSize: 14,
-												scrollBehavior: "smooth",
-												"&:hover": { color: "text.primary" }
-											}}
-										>
-											{section.title}
-										</MuiLink>
+												<MuiLink
+													key={section.id}
+													href={`#${section.id}`}
+													underline="hover"
+													color="text.secondary"
+													sx={{
+														fontSize: 14,
+														scrollBehavior: "smooth",
+														"&:hover": { color: "text.primary" }
+													}}
+												>
+													{section.title}
+												</MuiLink>
 											))}
 										</Stack>
 									</CardContent>
 								</Card>
-							</Grid>
-							<Grid item xs={12} md={8}>
+							</Box>
+							<Box>
 								<Stack spacing={4}>
 									{sections.map((section) => (
 										<Box key={section.id} id={section.id}>
@@ -146,8 +141,8 @@ export default function PrivacyPage() {
 										</Box>
 									))}
 								</Stack>
-							</Grid>
-						</Grid>
+							</Box>
+						</Box>
 					</CardContent>
 				</Card>
 			</Container>

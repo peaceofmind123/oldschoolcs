@@ -1,0 +1,14 @@
+### Push-Relabel Deep Dive
+
+We maintain heights $h(v)$ and excess $e(v)$, pushing admissible edges where $h(v) = h(w) + 1$. Relabeling ensures progress:
+
+```
+while excess(v) > 0:
+  if exists admissible edge (v, w):
+    push(v, w)
+  else:
+    relabel(v)
+```
+
+The gap heuristic yields $O(V^3)$ complexity. We visualize height labels with annotated columns and show how they collapse when a gap appears.
+

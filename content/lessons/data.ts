@@ -1,7 +1,9 @@
 export type LessonSection = {
+    id: string;
     title: string;
     total: string;
     lessons: { title: string; time: string }[];
+    contentFile: string;
 };
 
 export type Lesson = {
@@ -11,6 +13,7 @@ export type Lesson = {
     summary: string;
     videoUrl: string;
     category: string;
+    tagline: string;
     bulletPoints: string[];
     metrics: {
         lessons: number;
@@ -31,7 +34,6 @@ export type Lesson = {
     browseOrder?: number;
     thumbnail: string;
     heroImage: string;
-    tagline: string;
 };
 
 export const lessons: Lesson[] = [
@@ -68,6 +70,7 @@ export const lessons: Lesson[] = [
         },
         sections: [
             {
+                id: "primer",
                 title: "01: Primer",
                 total: "22 min",
                 lessons: [
@@ -75,48 +78,29 @@ export const lessons: Lesson[] = [
                     { title: "Why graphs?", time: "5 min" },
                     { title: "Residual networks", time: "12 min" },
                     { title: "Algorithm tour", time: "3 min" }
-                ]
+                ],
+                contentFile: "max-flow/primer.mdx"
             },
             {
+                id: "residual",
                 title: "02: Intermediate Level Stuff",
                 total: "1h 20min",
                 lessons: [
                     { title: "Bipartite matching", time: "18 min" },
                     { title: "Scaling heuristics", time: "26 min" },
                     { title: "Visualization workshop", time: "36 min" }
-                ]
+                ],
+                contentFile: "max-flow/residual.mdx"
             },
             {
+                id: "push-relabel",
                 title: "03: Advanced Flows",
                 total: "36 min",
                 lessons: [
                     { title: "Push-relabel deep dive", time: "20 min" },
                     { title: "Dinic optimizations", time: "16 min" }
-                ]
-            },
-            {
-                title: "04: Imports & Graphics",
-                total: "40 min",
-                lessons: [
-                    { title: "Parsing real networks", time: "15 min" },
-                    { title: "Rendering custom widgets", time: "25 min" }
-                ]
-            },
-            {
-                title: "05: Systems in Practice",
-                total: "1h 12min",
-                lessons: [
-                    { title: "Operations research case study", time: "32 min" },
-                    { title: "Data streaming infra", time: "40 min" }
-                ]
-            },
-            {
-                title: "06: Summary",
-                total: "8 min",
-                lessons: [
-                    { title: "Where to go next", time: "5 min" },
-                    { title: "Project brief", time: "3 min" }
-                ]
+                ],
+                contentFile: "max-flow/push-relabel.mdx"
             }
         ],
         sidebarLinks: ["Dashboard", "eBook", "Courses", "Code Challenges", "Community"],
@@ -158,22 +142,26 @@ export const lessons: Lesson[] = [
         },
         sections: [
             {
+                id: "llm-foundations",
                 title: "01: Foundations",
                 total: "30 min",
                 lessons: [
                     { title: "Entanglement primer", time: "10 min" },
                     { title: "Prompt regression", time: "10 min" },
                     { title: "Attention probes", time: "10 min" }
-                ]
+                ],
+                contentFile: "llm/foundations.mdx"
             },
             {
+                id: "llm-production",
                 title: "02: Production Readiness",
                 total: "55 min",
                 lessons: [
                     { title: "Latency budgets", time: "20 min" },
                     { title: "Cost shaping", time: "15 min" },
                     { title: "Safety playbook", time: "20 min" }
-                ]
+                ],
+                contentFile: "llm/production.mdx"
             }
         ],
         sidebarLinks: ["Dashboard", "eBook", "Courses", "Code Challenges", "Community"],
@@ -210,20 +198,24 @@ export const lessons: Lesson[] = [
         },
         sections: [
             {
+                id: "hardware-constraints",
                 title: "01: Constraints",
                 total: "25 min",
                 lessons: [
                     { title: "Board-level budgets", time: "10 min" },
                     { title: "Thermal envelopes", time: "15 min" }
-                ]
+                ],
+                contentFile: "hardware/constraints.mdx"
             },
             {
+                id: "hardware-prototyping",
                 title: "02: Prototyping",
                 total: "50 min",
                 lessons: [
                     { title: "CAN bus playback", time: "20 min" },
                     { title: "Latency aware UI", time: "30 min" }
-                ]
+                ],
+                contentFile: "hardware/prototyping.mdx"
             }
         ],
         sidebarLinks: ["Dashboard", "eBook", "Courses", "Code Challenges", "Community"],

@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Container, Divider, IconButton, Stack, Typography } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -13,17 +13,23 @@ export function SiteFooter() {
 	return (
 		<Box component="footer" sx={{ mt: 8, background: "#041f2b", color: "rgba(255,255,255,0.9)" }}>
 			<Container sx={{ py: 6 }}>
-				<Grid container spacing={4}>
-					<Grid item xs={12} md={4}>
+				<Box
+					sx={{
+						display: "grid",
+						gap: { xs: 3, md: 4 },
+						gridTemplateColumns: { xs: "repeat(2, minmax(0, 1fr))", md: "minmax(0, 2fr) repeat(3, minmax(0, 1fr))" }
+					}}
+				>
+					<Box sx={{ gridColumn: { xs: "1 / -1", md: "auto" } }}>
 						<Typography variant="h6" fontWeight={700}>
 							Old School CS
 						</Typography>
 						<Typography variant="body2" color="rgba(255,255,255,0.6)" sx={{ mt: 1 }}>
 							An independent CS & engineering publication helping you reason about complex systems.
 						</Typography>
-					</Grid>
+					</Box>
 					{footerLinks.map((section) => (
-						<Grid key={section.title} item xs={12} md={2}>
+						<Box key={section.title}>
 							<Typography fontWeight={600}>{section.title}</Typography>
 							<Stack spacing={0.8} mt={1.5}>
 								{section.items.map((item) => (
@@ -32,9 +38,9 @@ export function SiteFooter() {
 									</Typography>
 								))}
 							</Stack>
-						</Grid>
+						</Box>
 					))}
-				</Grid>
+				</Box>
 
 				<Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.1)" }} />
 

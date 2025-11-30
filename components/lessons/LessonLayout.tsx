@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import {
 	Accordion,
@@ -8,9 +8,9 @@ import {
 	AccordionSummary,
 	Avatar,
 	Box,
+	Button,
 	Card,
 	CardContent,
-	Chip,
 	Divider,
 	List,
 	ListItem,
@@ -18,10 +18,7 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Stack,
-	Tab,
-	Tabs,
-	Typography,
-	Button
+	Typography
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -32,6 +29,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import { Lesson } from "@/lib/lessons";
+import { LessonSectionContent } from "@/lib/lesson-content";
 
 const sidebarIconMap: Record<string, React.ElementType> = {
 	Dashboard: DashboardIcon,
@@ -41,8 +39,14 @@ const sidebarIconMap: Record<string, React.ElementType> = {
 	Community: PeopleAltIcon
 };
 
-export function LessonLayout({ lesson }: { lesson: Lesson }) {
-	const [tab, setTab] = React.useState(0);
+type LessonLayoutProps = {
+	lesson: Lesson;
+	sections: LessonSectionContent[];
+};
+
+export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
+	const [activeSectionId, setActiveSectionId] = useState(sections[0]?.id);
+	const activeSection = useMemo(() => sections.find((item) => item.id === activeSectionId) ?? sections[0], [sections, activeSectionId]);
 
 	return (
 		<Box
@@ -142,63 +146,48 @@ export function LessonLayout({ lesson }: { lesson: Lesson }) {
 					</CardContent>
 				</Card>
 
-				<Card variant="outlined" sx={{ mt: 3, p: 2 }}>
-					<Tabs value={tab} onChange={(_e, value) => setTab(value)} variant="scrollable" scrollButtons="auto" sx={{ borderBottom: 1, borderColor: "divider" }}>
-						<Tab label="Overview" />
-						<Tab label="Author" />
-						<Tab label="Resources" />
-					</Tabs>
-
-					<Box hidden={tab !== 0} sx={{ mt: 3 }}>
-						<Typography variant="h6" fontWeight={700}>
-							About this lesson
-						</Typography>
-						<Typography color="text.secondary" sx={{ mt: 1.5 }}>
-							{lesson.summary}
-						</Typography>
-						<Typography variant="h6" fontWeight={700} sx={{ mt: 3 }}>
-							What you&apos;ll learn
-						</Typography>
-						<Stack spacing={1.5} mt={1.5}>
-							{lesson.bulletPoints.map((item) => (
-								<Stack key={item} direction="row" spacing={1.5} alignItems="flex-start">
-									<Chip size="small" label="✓" color="primary" sx={{ color: "#fff", minWidth: 28 }} />
-									<Typography color="text.secondary">{item}</Typography>
-								</Stack>
+				<Card variant="outlined" sx={{ mt: 3, p: 3 }}>
+					<Stack direction={{ xs: "column", md: "row" }} spacing={3}>
+						<Stack spacing={1.5} sx={{ minWidth: 240 }}>
+							<Typography variant="h6" fontWeight={700}>
+								Sections
+							</Typography>
+							{sections.map((section) => (
+								<Button
+									key={section.id}
+									variant={section.id === activeSection?.id ? "contained" : "outlined"}
+									color={section.id === activeSection?.id ? "primary" : "inherit"}
+									onClick={() => setActiveSectionId(section.id)}
+									sx={{ justifyContent: "flex-start" }}
+								>
+									<Stack alignItems="flex-start">
+										<Typography fontWeight={600}>{section.title}</Typography>
+										<Typography variant="caption" color="text.secondary">
+											{section.total}
+										</Typography>
+									</Stack>
+								</Button>
 							))}
 						</Stack>
-					</Box>
-
-					<Box hidden={tab !== 1} sx={{ mt: 3 }}>
-						<Stack direction="row" spacing={2} alignItems="center">
-							<Avatar src={lesson.author.avatar} sx={{ width: 56, height: 56 }} />
-							<Box>
-								<Typography fontWeight={700}>{lesson.author.name}</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{lesson.author.role}
-								</Typography>
-							</Box>
-						</Stack>
-						<Typography color="text.secondary" sx={{ mt: 2 }}>
-							{lesson.author.bio}
-						</Typography>
-					</Box>
-
-					<Box hidden={tab !== 2} sx={{ mt: 3 }}>
-						{lesson.externalResources?.length ? (
-							<Stack spacing={1.5}>
-								{lesson.externalResources.map((resource) => (
-									<Button key={resource.label} component={Link} href={resource.url} target="_blank" rel="noreferrer" sx={{ justifyContent: "flex-start" }}>
-										{resource.label}
-									</Button>
-								))}
-							</Stack>
-						) : (
-							<Typography variant="body2" color="text.secondary">
-								External resources will appear here.
-							</Typography>
-						)}
-					</Box>
+						<Box
+							flex={1}
+							minHeight={300}
+							sx={{
+								"& .katex-display": { overflowX: "auto" },
+								"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
+								"& img": { maxWidth: "100%", borderRadius: 2 }
+							}}
+						>
+							{activeSection ? (
+								<Box
+									sx={{ fontSize: 15, lineHeight: 1.7 }}
+									dangerouslySetInnerHTML={{ __html: activeSection.html }}
+								/>
+							) : (
+								<Typography color="text.secondary">Select a section to view its content.</Typography>
+							)}
+						</Box>
+					</Stack>
 				</Card>
 			</Box>
 
@@ -262,5 +251,3 @@ export function LessonLayout({ lesson }: { lesson: Lesson }) {
 		</Box>
 	);
 }
-
-

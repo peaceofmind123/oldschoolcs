@@ -1,0 +1,17 @@
+### Primer: building intuition
+
+Flows satisfy conservation constraints and capacity bounds. We illustrate with a small network and animate augmenting paths.
+
+> _Key idea:_ every augmenting path increases flow until no residual capacity remains.
+
+Inline math example: $f(u,v) \\le c(u,v)$.
+
+<img src="/design_portfolio.webp" alt="Primer hero" width="1200" height="800" style="width: 100%; border-radius: 12px;" />
+
+```
+const dfs = (u, t, flow) => {
+  if (u === t) return flow;
+  // recursively search residual edges
+};
+```
+

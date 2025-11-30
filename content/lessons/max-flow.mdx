@@ -1,0 +1,76 @@
+---
+slug: "max-flow-systems"
+title: "Max-Flow Systems from A to Z"
+subtitle: "Designing resilient infrastructure for millions of requests."
+category: "Courses · Algorithms"
+tagline: "Graph Theory"
+featured: true
+featuredOrder: 1
+browseOrder: 1
+thumbnail: "/img1.jpg"
+heroImage: "/img1.jpg"
+metrics:
+  lessons: 38
+  duration: "4h 30min"
+  reviews: "4.9 ⭐ (212 reviews)"
+author:
+  name: "Crystal Lucas"
+  role: "Systems Engineer & Teaching Fellow"
+  avatar: "/img2.jpg"
+sections:
+  - title: "Flow Primer"
+    total: "22 min"
+    id: "primer"
+  - title: "Residual Graphs & Cuts"
+    total: "35 min"
+    id: "residual"
+  - title: "Push-Relabel Deep Dive"
+    total: "40 min"
+    id: "push-relabel"
+---
+
+### Primer: building intuition
+
+Consider a directed network \( G = (V, E) \) with capacities \( c(u, v) \). The goal is to maximize the flow \( f \) from source \( s \) to sink \( t \) while meeting constraints:
+
+$$
+\begin{aligned}
+0 &\le f(u, v) \le c(u, v) \\\\
+\sum_{(u, v) \in E} f(u, v) &= \sum_{(v, u) \in E} f(v, u) \quad \text{for all } v \ne s, t
+\end{aligned}
+$$
+
+We start with a small example and animate augmenting paths directly in your browser.
+
+### Residual Graphs & Cuts
+
+Residual capacity is defined as \( c_f(u,v) = c(u,v) - f(u,v) \). Visualizing residual networks is easier with photos or diagrams:
+
+<img src="/design_portfolio.webp" alt="Residual diagram" width="1200" height="800" style="width: 100%; border-radius: 12px;" />
+
+We link out to embeded video explainers to keep the bundle light:
+
+<iframe
+  width="100%"
+  height="360"
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  title="Max Flow Residual Graphs"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+/>
+
+### Push-Relabel Deep Dive
+
+We combine heuristics such as highest-label selection and gap relabeling. Pseudocode is rendered inline:
+
+```pseudo
+while excess(v) > 0:
+  if exists admissible edge (v, w):
+    push(v, w)
+  else:
+    relabel(v)
+```
+
+You can scroll through the sections in the sidebar to see each MDX block render instantly without leaving the page.
+

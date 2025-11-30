@@ -52,7 +52,7 @@ export async function getPostBySlug(slug: string): Promise<{
 		description: fm.data.description as string | undefined,
 		tags: (fm.data.tags as string[] | undefined) ?? []
 	};
-	const { content, frontmatter } = fm;
+	const { content } = fm;
 	const compiled = await compileMDX({
 		source: content,
 		options: {
@@ -64,10 +64,7 @@ export async function getPostBySlug(slug: string): Promise<{
 			}
 		}
 	});
-	return {
-		meta: { ...meta, ...(frontmatter as Record<string, unknown>) } as PostMeta,
-		Content: compiled.content
-	};
+	return { meta, Content: compiled.content };
 }
 
 
