@@ -12,8 +12,8 @@ type LessonLayoutProps = {
 };
 
 export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
-	const [activeSectionId, setActiveSectionId] = useState(sections[0]?.id);
-	const activeSection = useMemo(() => sections.find((item) => item.id === activeSectionId) ?? sections[0], [sections, activeSectionId]);
+	const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
+	const activeSection = useMemo(() => sections.find((item) => item.id === activeSectionId), [sections, activeSectionId]);
 
 	return (
 		<Box
@@ -75,7 +75,7 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 							Course content
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
-							{lesson.sections.length} sections • {lesson.metrics.duration} total runtime
+					{lesson.sections.length} sections • {lesson.metrics.duration} total runtime
 						</Typography>
 					</CardContent>
 					<Divider />
@@ -84,7 +84,7 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 							key={section.title}
 							disableGutters
 							expanded={section.id === activeSection?.id}
-							onChange={() => setActiveSectionId(section.id)}
+							onChange={(_event, expanded) => setActiveSectionId(expanded ? section.id : null)}
 						>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 								<Box>
