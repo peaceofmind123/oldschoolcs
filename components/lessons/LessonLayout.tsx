@@ -24,8 +24,24 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 			}}
 		>
 			<Box>
-				<Card variant="outlined" sx={{ overflow: "hidden" }}>
-					<Box sx={{ position: "relative", aspectRatio: "16 / 9", bgcolor: "#d9dce8" }}>
+				<Card
+					variant="outlined"
+					sx={{
+						overflow: "hidden",
+						maxWidth: { lg: 1040 },
+						mx: { lg: "auto" }
+					}}
+				>
+					<Box
+						sx={{
+							position: "relative",
+							aspectRatio: "16 / 9",
+							bgcolor: "#d9dce8",
+							maxHeight: { xs: 320, md: 420, lg: 460 },
+							width: "100%",
+							mx: "auto"
+						}}
+					>
 						<Box
 							component="iframe"
 							src={lesson.videoUrl}
