@@ -1,14 +1,12 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import Link from "next/link";
 import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
 	Avatar,
 	Box,
-	Button,
 	Card,
 	CardContent,
 	Divider,
@@ -146,49 +144,6 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 					</CardContent>
 				</Card>
 
-				<Card variant="outlined" sx={{ mt: 3, p: 3 }}>
-					<Stack direction={{ xs: "column", md: "row" }} spacing={3}>
-						<Stack spacing={1.5} sx={{ minWidth: 240 }}>
-							<Typography variant="h6" fontWeight={700}>
-								Sections
-							</Typography>
-							{sections.map((section) => (
-								<Button
-									key={section.id}
-									variant={section.id === activeSection?.id ? "contained" : "outlined"}
-									color={section.id === activeSection?.id ? "primary" : "inherit"}
-									onClick={() => setActiveSectionId(section.id)}
-									sx={{ justifyContent: "flex-start" }}
-								>
-									<Stack alignItems="flex-start">
-										<Typography fontWeight={600}>{section.title}</Typography>
-										<Typography variant="caption" color="text.secondary">
-											{section.total}
-										</Typography>
-									</Stack>
-								</Button>
-							))}
-						</Stack>
-						<Box
-							flex={1}
-							minHeight={300}
-							sx={{
-								"& .katex-display": { overflowX: "auto" },
-								"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
-								"& img": { maxWidth: "100%", borderRadius: 2 }
-							}}
-						>
-							{activeSection ? (
-								<Box
-									sx={{ fontSize: 15, lineHeight: 1.7 }}
-									dangerouslySetInnerHTML={{ __html: activeSection.html }}
-								/>
-							) : (
-								<Typography color="text.secondary">Select a section to view its content.</Typography>
-							)}
-						</Box>
-					</Stack>
-				</Card>
 			</Box>
 
 			<Stack spacing={3}>
@@ -202,8 +157,13 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 						</Typography>
 					</CardContent>
 					<Divider />
-					{lesson.sections.map((section, index) => (
-						<Accordion key={section.title} defaultExpanded={index === 0} disableGutters>
+					{lesson.sections.map((section) => (
+						<Accordion
+							key={section.title}
+							disableGutters
+							expanded={section.id === activeSection?.id}
+							onChange={() => setActiveSectionId(section.id)}
+						>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 								<Box>
 									<Typography fontWeight={600}>{section.title}</Typography>
@@ -215,12 +175,36 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 							<AccordionDetails>
 								<Stack spacing={1}>
 									{section.lessons.map((lessonItem) => (
-										<Stack key={lessonItem.title} direction="row" justifyContent="space-between" color="text.secondary" fontSize={14}>
+										<Box
+											key={lessonItem.title}
+											onClick={() => setActiveSectionId(section.id)}
+											sx={{
+												display: "flex",
+												justifyContent: "space-between",
+												color: "text.secondary",
+												fontSize: 14,
+												cursor: "pointer",
+												"&:hover": { color: "text.primary" }
+											}}
+										>
 											<span>{lessonItem.title}</span>
 											<span>{lessonItem.time}</span>
-										</Stack>
+										</Box>
 									))}
 								</Stack>
+								{section.id === activeSection?.id ? (
+									<Box
+										sx={{
+											mt: 2,
+											fontSize: 15,
+											lineHeight: 1.7,
+											"& .katex-display": { overflowX: "auto" },
+											"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
+											"& img": { maxWidth: "100%", borderRadius: 2 }
+										}}
+										dangerouslySetInnerHTML={{ __html: section.html }}
+									/>
+								) : null}
 							</AccordionDetails>
 						</Accordion>
 					))}
