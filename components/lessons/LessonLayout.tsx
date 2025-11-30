@@ -1,41 +1,10 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import {
-	Accordion,
-	AccordionDetails,
-	AccordionSummary,
-	Avatar,
-	Box,
-	Card,
-	CardContent,
-	Divider,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-	Stack,
-	Typography
-} from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Box, Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import SchoolIcon from "@mui/icons-material/School";
-import CodeIcon from "@mui/icons-material/Code";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import SettingsIcon from "@mui/icons-material/Settings";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import { Lesson } from "@/lib/lessons";
 import { LessonSectionContent } from "@/lib/lesson-content";
-
-const sidebarIconMap: Record<string, React.ElementType> = {
-	Dashboard: DashboardIcon,
-	eBook: MenuBookIcon,
-	Courses: SchoolIcon,
-	"Code Challenges": CodeIcon,
-	Community: PeopleAltIcon
-};
 
 type LessonLayoutProps = {
 	lesson: Lesson;
@@ -51,72 +20,9 @@ export function LessonLayout({ lesson, sections }: LessonLayoutProps) {
 			sx={{
 				display: "grid",
 				gap: { xs: 3, lg: 4 },
-				gridTemplateColumns: { xs: "1fr", lg: "220px 1fr 320px" }
+				gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1fr) 320px" }
 			}}
 		>
-			<Card variant="outlined" sx={{ p: 2, bgcolor: "#fafbff" }}>
-				<Stack direction="row" alignItems="center" spacing={1.5}>
-					<Box
-						sx={{
-							width: 32,
-							height: 32,
-							borderRadius: 2,
-							bgcolor: "primary.main",
-							color: "primary.contrastText",
-							display: "grid",
-							placeItems: "center",
-							fontWeight: 700
-						}}
-					>
-						OS
-					</Box>
-					<Typography fontWeight={700}>Old School CS</Typography>
-				</Stack>
-				<Stack direction="row" alignItems="center" spacing={1.5} sx={{ mt: 3, mb: 2 }}>
-					<Avatar src="/img4.jpg" alt="Scott" />
-					<Box>
-						<Typography fontWeight={600}>Scott M.</Typography>
-						<Typography variant="caption" color="text.secondary">
-							Member since 2020
-						</Typography>
-					</Box>
-				</Stack>
-				<List dense>
-					{lesson.sidebarLinks.map((label) => {
-						const Icon = sidebarIconMap[label] ?? DashboardIcon;
-						return (
-							<ListItem key={label} disablePadding>
-								<ListItemButton selected={label === "Courses"}>
-									<ListItemIcon sx={{ minWidth: 32 }}>
-										<Icon fontSize="small" />
-									</ListItemIcon>
-									<ListItemText primaryTypographyProps={{ fontSize: 14, fontWeight: label === "Courses" ? 600 : 500 }} primary={label} />
-								</ListItemButton>
-							</ListItem>
-						);
-					})}
-				</List>
-				<Divider sx={{ my: 2 }} />
-				<List dense>
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon sx={{ minWidth: 32 }}>
-								<SettingsIcon fontSize="small" />
-							</ListItemIcon>
-							<ListItemText primaryTypographyProps={{ fontSize: 14 }} primary="Settings" />
-						</ListItemButton>
-					</ListItem>
-					<ListItem disablePadding>
-						<ListItemButton>
-							<ListItemIcon sx={{ minWidth: 32 }}>
-								<SupportAgentIcon fontSize="small" />
-							</ListItemIcon>
-							<ListItemText primaryTypographyProps={{ fontSize: 14 }} primary="Support" />
-						</ListItemButton>
-					</ListItem>
-				</List>
-			</Card>
-
 			<Box>
 				<Card variant="outlined" sx={{ overflow: "hidden" }}>
 					<Box sx={{ position: "relative", aspectRatio: "16 / 9", bgcolor: "#d9dce8" }}>
