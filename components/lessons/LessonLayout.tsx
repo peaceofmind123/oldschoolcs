@@ -98,187 +98,188 @@ export function LessonLayout({
 			}}
 		>
 			<Box>
-				{!hasActiveSection ? (
-					<Card
-						variant="outlined"
-						sx={{
-							overflow: "hidden",
-							maxWidth: { lg: 1040 },
-							mx: { lg: "auto" }
-						}}
-					>
-						<Box
+				<Stack spacing={3}>
+					{!hasActiveSection ? (
+						<Card
+							variant="outlined"
 							sx={{
-								position: "relative",
-								aspectRatio: "16 / 9",
-								bgcolor: "#d9dce8",
-								maxHeight: { xs: 320, md: 420, lg: 460 },
-								width: "100%",
-								mx: "auto"
+								overflow: "hidden",
+								maxWidth: { lg: 1040 },
+								mx: { lg: "auto" }
 							}}
 						>
 							<Box
-								component="iframe"
-								src={lesson.videoUrl}
-								title={lesson.title}
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen
-								sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
-							/>
-						</Box>
-						<CardContent>
-							<Typography variant="overline" color="text.secondary">
-								{lesson.category}
-							</Typography>
-							<Typography variant="h5" fontWeight={700}>
-								{lesson.title}
-							</Typography>
-							<Stack direction="row" spacing={3} mt={1} color="text.secondary">
-								<Typography variant="body2">{lesson.metrics.lessons} lessons</Typography>
-								<Typography variant="body2">{lesson.metrics.duration}</Typography>
-								<Typography variant="body2">{lesson.metrics.reviews}</Typography>
-							</Stack>
-						</CardContent>
-					</Card>
-				) : null}
-				<Box
-					sx={{
-						mt: { xs: hasActiveSection ? 0 : 3, md: hasActiveSection ? 1 : 4 },
-						borderRadius: 1,
-						border: "1px solid rgba(5,46,53,0.08)",
-						backgroundColor: "#fff",
-						boxShadow: highlightContentArea ? "0 0 0 3px rgba(97,224,197,0.35)" : "0 35px 60px rgba(5,46,53,0.05)",
-						p: { xs: 3, md: 4 },
-						maxWidth: { lg: 1040 },
-						mx: { lg: "auto" },
-						transition: "box-shadow 0.3s ease, border-color 0.3s ease"
-					}}
-					ref={handleCardRef}
-				>
-					{activeSection ? (
-						<Stack spacing={2.5}>
-							<Box>
-								<Typography variant="overline" color="text.secondary">
-									Section
-								</Typography>
-								<Typography variant="h4" fontWeight={700}>
-									{activeSection.title}
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{activeSection.total}
-								</Typography>
-							</Box>
-							<Divider />
-							<Box
 								sx={{
-									fontSize: 15,
-									lineHeight: 1.75,
-									color: "text.primary",
-									"& .katex-display": { overflowX: "auto" },
-									"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
-									"& img": { maxWidth: "100%", borderRadius: 2 },
-									"& .lesson-code-block": {
-										position: "relative",
-										backgroundColor: "#081422",
-										color: "#f8fbfa",
-										borderRadius: 2,
-										overflow: "hidden",
-										margin: "22px 0",
-										border: "1px solid rgba(244,251,250,0.08)",
-										boxShadow: "0 25px 45px rgba(5, 19, 30, 0.35)"
-									},
-									"& .lesson-code-block pre": {
-										margin: 0,
-										padding: "28px 28px 22px 28px",
-										overflowX: "auto",
-										fontSize: 14,
-										backgroundColor: "transparent",
-										fontFamily: [
-											"Fira Code",
-											"Source Code Pro",
-											"ui-monospace",
-											"SFMono-Regular",
-											"Menlo",
-											"Monaco",
-											"Consolas",
-											"Liberation Mono",
-											"Courier New",
-											"monospace"
-										],
-										"& code": {
-											fontFamily: "inherit"
-										}
-									},
-									"& .lesson-code-block code": {
-										background: "transparent",
-										padding: 0,
-										color: "inherit",
-										fontSize: "inherit",
-										fontFamily: [
-											"Fira Code",
-											"Source Code Pro",
-											"ui-monospace",
-											"SFMono-Regular",
-											"Menlo",
-											"Monaco",
-											"Consolas",
-											"Liberation Mono",
-											"Courier New",
-											"monospace"
-										]
-									},
-									"& .lesson-copy-button": {
-										position: "absolute",
-										top: 12,
-										right: 14,
-										backgroundColor: "rgba(244,251,250,0.12)",
-										color: "#f4fbfa",
-										border: "1px solid rgba(244,251,250,0.3)",
-										borderRadius: "6px",
-										padding: "8px",
-										width: "32px",
-										height: "32px",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										cursor: "pointer",
-										transition: "background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease",
-										backdropFilter: "blur(6px)",
-										"& svg": {
-											width: "16px",
-											height: "16px",
-											transition: "transform 0.2s ease"
-										}
-									},
-									"& .lesson-copy-button:hover": {
-										backgroundColor: "rgba(244,251,250,0.25)",
-										color: "#f4fbfa"
-									},
-									"& .lesson-copy-button.copy-success": {
-										backgroundColor: "rgba(97,224,197,0.25)",
-										borderColor: "rgba(97,224,197,0.6)",
-										color: "#61e0c5",
-										transform: "scale(1.1)",
-										"& svg": {
-											transform: "scale(1.1)"
-										}
-									}
+									position: "relative",
+									aspectRatio: "16 / 9",
+									bgcolor: "#d9dce8",
+									maxHeight: { xs: 320, md: 420, lg: 460 },
+									width: "100%",
+									mx: "auto"
 								}}
-								ref={htmlContainerRef}
-								dangerouslySetInnerHTML={{ __html: activeSection.html }}
-							/>
-						</Stack>
-					) : (
-						<Stack spacing={1.5}>
-							<Typography variant="h5" fontWeight={600}>
-								Start your lesson
-							</Typography>
-							<Typography color="text.secondary">
-								Select a section from the Course content panel or press “Begin lesson” to dive into the first section.
-							</Typography>
-						</Stack>
-					)}
-				</Box>
+							>
+								<Box
+									component="iframe"
+									src={lesson.videoUrl}
+									title={lesson.title}
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+									sx={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+								/>
+							</Box>
+							<CardContent>
+								<Typography variant="overline" color="text.secondary">
+									{lesson.category}
+								</Typography>
+								<Typography variant="h5" fontWeight={700}>
+									{lesson.title}
+								</Typography>
+								<Stack direction="row" spacing={3} mt={1} color="text.secondary">
+									<Typography variant="body2">{lesson.metrics.lessons} lessons</Typography>
+									<Typography variant="body2">{lesson.metrics.duration}</Typography>
+									<Typography variant="body2">{lesson.metrics.reviews}</Typography>
+								</Stack>
+							</CardContent>
+						</Card>
+					) : null}
+					<Box
+						sx={{
+							borderRadius: 1,
+							border: "1px solid rgba(5,46,53,0.08)",
+							backgroundColor: "#fff",
+							boxShadow: highlightContentArea ? "0 0 0 3px rgba(97,224,197,0.35)" : "0 35px 60px rgba(5,46,53,0.05)",
+							p: { xs: 3, md: 4 },
+							maxWidth: { lg: 1040 },
+							mx: { lg: "auto" },
+							transition: "box-shadow 0.3s ease, border-color 0.3s ease"
+						}}
+						ref={handleCardRef}
+					>
+						{activeSection ? (
+							<Stack spacing={2.5}>
+								<Box>
+									<Typography variant="overline" color="text.secondary">
+										Section
+									</Typography>
+									<Typography variant="h4" fontWeight={700}>
+										{activeSection.title}
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										{activeSection.total}
+									</Typography>
+								</Box>
+								<Divider />
+								<Box
+									sx={{
+										fontSize: 15,
+										lineHeight: 1.75,
+										color: "text.primary",
+										"& .katex-display": { overflowX: "auto" },
+										"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
+										"& img": { maxWidth: "100%", borderRadius: 2 },
+										"& .lesson-code-block": {
+											position: "relative",
+											backgroundColor: "#081422",
+											color: "#f8fbfa",
+											borderRadius: 2,
+											overflow: "hidden",
+											margin: "22px 0",
+											border: "1px solid rgba(244,251,250,0.08)",
+											boxShadow: "0 25px 45px rgba(5, 19, 30, 0.35)"
+										},
+										"& .lesson-code-block pre": {
+											margin: 0,
+											padding: "28px 28px 22px 28px",
+											overflowX: "auto",
+											fontSize: 14,
+											backgroundColor: "transparent",
+											fontFamily: [
+												"Fira Code",
+												"Source Code Pro",
+												"ui-monospace",
+												"SFMono-Regular",
+												"Menlo",
+												"Monaco",
+												"Consolas",
+												"Liberation Mono",
+												"Courier New",
+												"monospace"
+											],
+											"& code": {
+												fontFamily: "inherit"
+											}
+										},
+										"& .lesson-code-block code": {
+											background: "transparent",
+											padding: 0,
+											color: "inherit",
+											fontSize: "inherit",
+											fontFamily: [
+												"Fira Code",
+												"Source Code Pro",
+												"ui-monospace",
+												"SFMono-Regular",
+												"Menlo",
+												"Monaco",
+												"Consolas",
+												"Liberation Mono",
+												"Courier New",
+												"monospace"
+											]
+										},
+										"& .lesson-copy-button": {
+											position: "absolute",
+											top: 12,
+											right: 14,
+											backgroundColor: "rgba(244,251,250,0.12)",
+											color: "#f4fbfa",
+											border: "1px solid rgba(244,251,250,0.3)",
+											borderRadius: "6px",
+											padding: "8px",
+											width: "32px",
+											height: "32px",
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											cursor: "pointer",
+											transition: "background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease",
+											backdropFilter: "blur(6px)",
+											"& svg": {
+												width: "16px",
+												height: "16px",
+												transition: "transform 0.2s ease"
+											}
+										},
+										"& .lesson-copy-button:hover": {
+											backgroundColor: "rgba(244,251,250,0.25)",
+											color: "#f4fbfa"
+										},
+										"& .lesson-copy-button.copy-success": {
+											backgroundColor: "rgba(97,224,197,0.25)",
+											borderColor: "rgba(97,224,197,0.6)",
+											color: "#61e0c5",
+											transform: "scale(1.1)",
+											"& svg": {
+												transform: "scale(1.1)"
+											}
+										}
+									}}
+									ref={htmlContainerRef}
+									dangerouslySetInnerHTML={{ __html: activeSection.html }}
+								/>
+							</Stack>
+						) : (
+							<Stack spacing={1.5}>
+								<Typography variant="h5" fontWeight={600}>
+									Start your lesson
+								</Typography>
+								<Typography color="text.secondary">
+									Select a section from the Course content panel or press “Begin lesson” to dive into the first section.
+								</Typography>
+							</Stack>
+						)}
+					</Box>
+				</Stack>
 			</Box>
 
 			<Stack spacing={3}>
