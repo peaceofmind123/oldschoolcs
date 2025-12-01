@@ -114,7 +114,7 @@ export function LessonLayout({
 								sx={{
 									fontSize: 15,
 									lineHeight: 1.75,
-									color: "text.secondary",
+									color: "text.primary",
 									"& .katex-display": { overflowX: "auto" },
 									"& iframe": { width: "100%", border: 0, borderRadius: 2, minHeight: 320 },
 									"& img": { maxWidth: "100%", borderRadius: 2 }
