@@ -46,6 +46,12 @@ a:hover {
 	overflow-x: auto;
 }
 
+/* Code block fonts */
+.lesson-code-block pre,
+.lesson-code-block code {
+	font-family: "Fira Code", "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

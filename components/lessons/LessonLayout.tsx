@@ -177,14 +177,39 @@ export function LessonLayout({
 										overflowX: "auto",
 										fontSize: 14,
 										backgroundColor: "transparent",
-										fontFamily:
-											"\"Fira Code\", \"Source Code Pro\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace"
+										fontFamily: [
+											"Fira Code",
+											"Source Code Pro",
+											"ui-monospace",
+											"SFMono-Regular",
+											"Menlo",
+											"Monaco",
+											"Consolas",
+											"Liberation Mono",
+											"Courier New",
+											"monospace"
+										],
+										"& code": {
+											fontFamily: "inherit"
+										}
 									},
 									"& .lesson-code-block code": {
 										background: "transparent",
 										padding: 0,
 										color: "inherit",
-										fontSize: "inherit"
+										fontSize: "inherit",
+										fontFamily: [
+											"Fira Code",
+											"Source Code Pro",
+											"ui-monospace",
+											"SFMono-Regular",
+											"Menlo",
+											"Monaco",
+											"Consolas",
+											"Liberation Mono",
+											"Courier New",
+											"monospace"
+										]
 									},
 									"& .lesson-copy-button": {
 										position: "absolute",
@@ -260,14 +285,14 @@ export function LessonLayout({
 													onSectionExpand(section.id);
 													onSectionChange(section.id);
 												}}
-											sx={{
-												display: "flex",
-												justifyContent: "space-between",
-												color: "text.secondary",
-												fontSize: 14,
-												cursor: "pointer",
-												"&:hover": { color: "text.primary" }
-											}}
+												sx={{
+													display: "flex",
+													justifyContent: "space-between",
+													color: "text.secondary",
+													fontSize: 14,
+													cursor: "pointer",
+													"&:hover": { color: "text.primary" }
+												}}
 											>
 												<span>{lessonItem.title}</span>
 												<span>{lessonItem.time}</span>
