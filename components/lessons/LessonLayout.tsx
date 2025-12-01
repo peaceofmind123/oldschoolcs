@@ -45,25 +45,41 @@ export function LessonLayout({
 
 		const handleCopyClick = async (event: MouseEvent) => {
 			const target = event.target as HTMLElement;
-			if (!target || !target.classList.contains("lesson-copy-button")) return;
+			const button = target.closest(".lesson-copy-button") as HTMLElement;
+			if (!button) return;
 
 			event.preventDefault();
 			event.stopPropagation();
 
-			const wrapper = target.closest(".lesson-code-block");
+			const wrapper = button.closest(".lesson-code-block");
 			const codeElement = wrapper?.querySelector("pre");
 			const text = codeElement?.textContent ?? "";
 			if (!text) return;
 
+			const svg = button.querySelector("svg");
+			if (!svg) return;
+
 			try {
 				await navigator.clipboard.writeText(text);
-				target.textContent = "Copied!";
+				// Add success state class
+				button.classList.add("copy-success");
+				// Replace with checkmark icon
+				svg.innerHTML = `
+					<path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+				`;
 			} catch {
-				target.textContent = "Failed";
+				// Keep copy icon on error
 			}
 
 			setTimeout(() => {
-				target.textContent = "Copy";
+				if (svg) {
+					svg.innerHTML = `
+						<rect width="14" height="14" x="8" y="8" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M4 16c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					`;
+				}
+				// Remove success state class
+				button.classList.remove("copy-success");
 			}, 1500);
 		};
 
@@ -218,17 +234,34 @@ export function LessonLayout({
 										backgroundColor: "rgba(244,251,250,0.12)",
 										color: "#f4fbfa",
 										border: "1px solid rgba(244,251,250,0.3)",
-										borderRadius: 999,
-										padding: "4px 14px",
-										fontSize: 12,
-										fontWeight: 600,
+										borderRadius: "6px",
+										padding: "8px",
+										width: "32px",
+										height: "32px",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
 										cursor: "pointer",
-										transition: "background-color 0.25s ease, color 0.25s ease",
-										backdropFilter: "blur(6px)"
+										transition: "background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease",
+										backdropFilter: "blur(6px)",
+										"& svg": {
+											width: "16px",
+											height: "16px",
+											transition: "transform 0.2s ease"
+										}
 									},
 									"& .lesson-copy-button:hover": {
 										backgroundColor: "rgba(244,251,250,0.25)",
-										color: "#061822"
+										color: "#f4fbfa"
+									},
+									"& .lesson-copy-button.copy-success": {
+										backgroundColor: "rgba(97,224,197,0.25)",
+										borderColor: "rgba(97,224,197,0.6)",
+										color: "#61e0c5",
+										transform: "scale(1.1)",
+										"& svg": {
+											transform: "scale(1.1)"
+										}
 									}
 								}}
 								ref={htmlContainerRef}
