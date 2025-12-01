@@ -7,7 +7,35 @@ import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import rehypeStringify from "rehype-stringify";
+import { visit } from "unist-util-visit";
 import { Lesson, LessonSection } from "@/content/lessons/data";
+
+function rehypeEnhanceCodeBlocks() {
+	return (tree: any) => {
+		visit(tree, "element", (node, index, parent) => {
+			if (!parent || index === undefined) return;
+			if (node.tagName !== "pre") return;
+
+			parent.children[index] = {
+				type: "element",
+				tagName: "div",
+				properties: { className: ["lesson-code-block"] },
+				children: [
+					{
+						type: "element",
+						tagName: "button",
+						properties: {
+							className: ["lesson-copy-button"],
+							type: "button"
+						},
+						children: [{ type: "text", value: "Copy" }]
+					},
+					node
+				]
+			};
+		});
+	};
+}
 
 const lessonsRoot = path.join(process.cwd(), "content", "lessons");
 
@@ -32,6 +60,7 @@ export async function loadLessonSectionsContent(lesson: Lesson): Promise<LessonS
 				.use(remarkRehype, { allowDangerousHtml: true })
 				.use(rehypeRaw)
 				.use(rehypeKatex)
+				.use(rehypeEnhanceCodeBlocks)
 				.use(rehypeStringify)
 				.process(source);
 			return {
