@@ -1,7 +1,9 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { AppBar, Box, Button, Container, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Stack, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const links = [
 	{ label: "Home", href: "/" },
@@ -10,6 +12,17 @@ const links = [
 ];
 
 export function NavBar() {
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+	const menuOpen = Boolean(anchorEl);
+
+	const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+	};
+
 	return (
 		<AppBar position="static" color="transparent" elevation={0} sx={{ py: 1 }}>
 			<Container>
@@ -18,8 +31,10 @@ export function NavBar() {
 						<Stack direction="row" spacing={1.5} alignItems="center">
 							<Box
 								sx={{
-									width: 36,
-									height: 36,
+									width: { xs: 28, sm: 32, md: 36 },
+									height: { xs: 28, sm: 32, md: 36 },
+									minWidth: { xs: 28, sm: 32, md: 36 },
+									minHeight: { xs: 28, sm: 32, md: 36 },
 									borderRadius: "50%",
 									background: "linear-gradient(135deg, #0d4c5b, #176d7a)",
 									color: "#f4fbfa",
@@ -46,12 +61,45 @@ export function NavBar() {
 						))}
 					</Stack>
 
-					<Stack direction="row" spacing={1.5} sx={{ ml: "auto" }}>
-						<Button variant="outlined" color="inherit" sx={{ borderRadius: 1 }}>
+					<Stack direction="row" spacing={1.5} sx={{ ml: "auto", display: { xs: "none", md: "flex" } }}>
+						<Button
+							variant="outlined"
+							color="inherit"
+							size="small"
+							sx={{ borderRadius: 1, fontSize: 14, px: 2, py: 0.75 }}
+						>
 							Get in Touch
 						</Button>
-						<Button variant="contained">Subscribe</Button>
+						<Button variant="contained" size="small" sx={{ fontSize: 14, px: 2.25, py: 0.75 }}>
+							Subscribe
+						</Button>
 					</Stack>
+
+					<Box sx={{ ml: "auto", display: { xs: "flex", md: "none" } }}>
+						<IconButton aria-label="Open menu" onClick={handleMenuOpen} size="small">
+							<MenuIcon />
+						</IconButton>
+					</Box>
+
+					<Menu
+						anchorEl={anchorEl}
+						open={menuOpen}
+						onClose={handleMenuClose}
+						anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+						transformOrigin={{ vertical: "top", horizontal: "right" }}
+					>
+						{links.map((link) => (
+							<MenuItem key={link.label} component={Link} href={link.href} onClick={handleMenuClose}>
+								{link.label}
+							</MenuItem>
+						))}
+						<MenuItem onClick={handleMenuClose}>
+							Get in Touch
+						</MenuItem>
+						<MenuItem onClick={handleMenuClose}>
+							Subscribe
+						</MenuItem>
+					</Menu>
 				</Toolbar>
 			</Container>
 		</AppBar>
