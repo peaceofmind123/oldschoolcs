@@ -11,13 +11,15 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "new:post": "node scripts/new-post.mjs"
+    "new:post": "node scripts/new-post.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
+    "@vercel/analytics": "^1.6.1",
     "feed": "^4.2.2",
     "framer-motion": "^12.23.24",
     "gray-matter": "^4.0.3",
@@ -45,6 +47,7 @@
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
+    "sharp": "^0.34.5",
     "tailwindcss": "latest",
     "typescript": "latest"
   }

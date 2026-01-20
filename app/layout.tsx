@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 import ThemeRegistry from "@/lib/mui/ThemeRegistry";
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<body>
 				<ThemeRegistry>
 					{children}
+					<Analytics />
 				</ThemeRegistry>
 			</body>
 		</html>
