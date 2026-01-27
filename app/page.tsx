@@ -48,7 +48,11 @@ export default function HomePage() {
 						<Typography variant="overline" sx={{ letterSpacing: ".3em", color: "rgba(244,251,250,0.6)" }}>
 							Old School CS
 						</Typography>
-						<Typography variant="h3" fontWeight={700}>
+						<Typography
+							variant="h3"
+							fontWeight={700}
+							sx={{ fontSize: { xs: "2.1rem", sm: "2.6rem", md: "3rem" }, lineHeight: 1.15 }}
+						>
 							Computer Science & Engineering, explained clearly
 						</Typography>
 						<Typography color="rgba(244,251,250,0.8)">
@@ -77,7 +81,7 @@ export default function HomePage() {
 
 			<Container sx={{ py: { xs: 6, md: 8 } }}>
 				<Stack spacing={1}>
-					<Typography variant="h4" fontWeight={700}>
+					<Typography variant="h4" fontWeight={700} sx={{ fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem" } }}>
 						Browse recent lessons
 					</Typography>
 					<Typography color="text.secondary">

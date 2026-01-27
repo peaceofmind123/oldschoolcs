@@ -30,7 +30,11 @@ export function UpcomingCard({ lesson }: UpcomingCardProps) {
                 }}
             >
 				<Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 1.5 }}>
-                    <Typography variant="h4" fontWeight={600} sx={{ color: "#052e35", whiteSpace: "pre-line" }}>
+                    <Typography
+                        variant="h4"
+                        fontWeight={600}
+                        sx={{ color: "#052e35", whiteSpace: "pre-line", fontSize: { xs: "1.5rem", sm: "1.9rem", md: "2.125rem" } }}
+                    >
 						{lesson.tagline}
                     </Typography>
 					{lesson.category ? (
