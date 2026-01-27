@@ -29,7 +29,11 @@ export function CtaPanel() {
 					<Typography variant="overline" sx={{ letterSpacing: ".2em", color: "rgba(244,251,250,0.7)" }}>
 						Stay curious
 					</Typography>
-					<Typography variant="h4" fontWeight={700}>
+					<Typography
+						variant="h4"
+						fontWeight={700}
+						sx={{ fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem" }, lineHeight: 1.2 }}
+					>
 						Get the Old School CS newsletter
 					</Typography>
 					<Typography color="rgba(244,251,250,0.75)">

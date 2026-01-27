@@ -46,7 +46,9 @@ const termsSections = [
 		title: "7. Contact",
 		body: [
 			"Questions about these terms? Email ",
-			<Link href="mailto:legal@oldschoolcs.com">legal@oldschoolcs.com</Link>,
+			<Link key="legal-email" href="mailto:legal@oldschoolcs.com">
+				legal@oldschoolcs.com
+			</Link>,
 			" anytime."
 		]
 	}
