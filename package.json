@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --max-warnings=0",
     "type-check": "tsc --noEmit",
     "new:post": "node scripts/new-post.mjs",
     "optimize:images": "node scripts/optimize-images.mjs"
