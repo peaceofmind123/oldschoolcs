@@ -46,14 +46,19 @@ export function WebinarCard({ lesson }: WebinarCardProps) {
 					{lesson.summary}
 				</Typography>
 
-				<Stack direction="row" alignItems="center" justifyContent="space-between">
+				<Stack
+					direction={{ xs: "column", sm: "row" }}
+					alignItems={{ xs: "flex-start", sm: "center" }}
+					justifyContent="space-between"
+					gap={1.5}
+				>
 					<Stack direction="row" spacing={1.2} alignItems="center">
 						<Avatar src={lesson.author.avatar} alt={lesson.author.name} sx={{ width: 36, height: 36 }} />
 						<Typography fontSize={14} fontWeight={600}>
 							{lesson.author.name}
 						</Typography>
 					</Stack>
-					<Button component={Link} href={`/lessons/${lesson.slug}`} size="small">
+					<Button component={Link} href={`/lessons/${lesson.slug}`} size="small" fullWidth>
 						Open lesson
 					</Button>
 				</Stack>

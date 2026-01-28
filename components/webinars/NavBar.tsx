@@ -24,9 +24,9 @@ export function NavBar() {
 	};
 
 	return (
-		<AppBar position="static" color="transparent" elevation={0} sx={{ py: 1 }}>
+		<AppBar position="static" color="transparent" elevation={0} sx={{ py: { xs: 0.5, sm: 1 } }}>
 			<Container>
-				<Toolbar disableGutters sx={{ gap: 4, minHeight: 72 }}>
+				<Toolbar disableGutters sx={{ gap: { xs: 2, md: 4 }, minHeight: { xs: 64, md: 72 } }}>
 					<Link href="/" style={{ textDecoration: "none" }}>
 						<Stack direction="row" spacing={1.5} alignItems="center">
 							<Box
@@ -45,7 +45,7 @@ export function NavBar() {
 							>
 								OS
 							</Box>
-							<Typography fontWeight={700} color="text.primary">
+							<Typography fontWeight={700} color="text.primary" sx={{ fontSize: { xs: 14, sm: 16 } }}>
 								Old School CS
 							</Typography>
 						</Stack>

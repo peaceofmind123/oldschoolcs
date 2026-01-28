@@ -51,7 +51,7 @@ export function UpcomingCarousel({ lessons, title = "Upcoming", itemsPerSlide = 
 
     return (
         <Box mt={6}>
-            <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
+            <Stack direction={{ xs: "column", sm: "row" }} alignItems={{ xs: "flex-start", sm: "center" }} justifyContent="space-between" mb={2} spacing={{ xs: 1.5, sm: 0 }}>
                 <Typography variant="h6" fontWeight={600}>
                     {title}
                 </Typography>

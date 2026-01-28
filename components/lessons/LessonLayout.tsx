@@ -134,7 +134,7 @@ export function LessonLayout({
 								<Typography variant="h5" fontWeight={700}>
 									{lesson.title}
 								</Typography>
-								<Stack direction="row" spacing={3} mt={1} color="text.secondary">
+								<Stack direction="row" spacing={3} mt={1} color="text.secondary" flexWrap="wrap" rowGap={1}>
 									<Typography variant="body2">{lesson.metrics.lessons} lessons</Typography>
 									<Typography variant="body2">{lesson.metrics.duration}</Typography>
 									<Typography variant="body2">{lesson.metrics.reviews}</Typography>

@@ -40,7 +40,7 @@ export function Footer() {
 						</ul>
 					</div>
 				</div>
-				<div className="mt-10 flex items-center justify-between text-xs text-ink-subtle">
+				<div className="mt-10 flex flex-col gap-2 text-xs text-ink-subtle sm:flex-row sm:items-center sm:justify-between">
 					<span>© {new Date().getFullYear()} OldSchool CS. All rights reserved.</span>
 					<span>Built with Next.js</span>
 				</div>

@@ -88,20 +88,26 @@ export function LessonPageClient({ lesson, sections, prev, next }: LessonPageCli
         <Box sx={{ bgcolor: "#f8fbfa" }}>
             <Container maxWidth="xl" sx={{ py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
                 <Stack spacing={{ xs: 2.5, md: 3.5 }}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Stack
+                        direction={{ xs: "column", sm: "row" }}
+                        justifyContent="space-between"
+                        alignItems={{ xs: "stretch", sm: "center" }}
+                        spacing={{ xs: 2, sm: 0 }}
+                    >
                         <Link href="/" style={{ textDecoration: "none" }}>
                             <Button startIcon={<ArrowBackIosNewIcon fontSize="small" />}>Back to library</Button>
                         </Link>
-                        <Stack direction="row" spacing={1.5}>
+                        <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} sx={{ width: { xs: "100%", sm: "auto" } }}>
                             <Button
                                 variant="outlined"
                                 color="inherit"
                                 startIcon={<ShareIcon fontSize="small" />}
                                 onClick={handleShareClick}
+                                fullWidth
                             >
                                 Share
                             </Button>
-                            <Button variant="contained" color="primary" onClick={handleBeginLesson} disabled={hasBegun}>
+                            <Button variant="contained" color="primary" onClick={handleBeginLesson} disabled={hasBegun} fullWidth>
                                 Begin lesson
                             </Button>
                         </Stack>
@@ -120,22 +126,32 @@ export function LessonPageClient({ lesson, sections, prev, next }: LessonPageCli
                         />
                     </Box>
 
-                    <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap={2}>
+                    <Stack
+                        direction={{ xs: "column", sm: "row" }}
+                        justifyContent="space-between"
+                        alignItems={{ xs: "stretch", sm: "center" }}
+                        flexWrap="wrap"
+                        gap={2}
+                    >
                         {prev ? (
                             <Link href={`/lessons/${prev.slug}`} style={{ textDecoration: "none" }}>
-                                <Button startIcon={<ArrowBackIosNewIcon fontSize="small" />}>Previous lesson</Button>
+                                <Button startIcon={<ArrowBackIosNewIcon fontSize="small" />} fullWidth>
+                                    Previous lesson
+                                </Button>
                             </Link>
                         ) : (
-                            <Button disabled startIcon={<ArrowBackIosNewIcon fontSize="small" />}>
+                            <Button disabled startIcon={<ArrowBackIosNewIcon fontSize="small" />} fullWidth>
                                 Previous lesson
                             </Button>
                         )}
                         {next ? (
                             <Link href={`/lessons/${next.slug}`} style={{ textDecoration: "none" }}>
-                                <Button endIcon={<ArrowForwardIcon fontSize="small" />}>Next lesson</Button>
+                                <Button endIcon={<ArrowForwardIcon fontSize="small" />} fullWidth>
+                                    Next lesson
+                                </Button>
                             </Link>
                         ) : (
-                            <Button disabled endIcon={<ArrowForwardIcon fontSize="small" />}>
+                            <Button disabled endIcon={<ArrowForwardIcon fontSize="small" />} fullWidth>
                                 Next lesson
                             </Button>
                         )}

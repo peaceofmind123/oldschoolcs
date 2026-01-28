@@ -74,7 +74,7 @@ export default function PrivacyPage() {
 				<Card sx={{ borderRadius: 3, boxShadow: "0 30px 50px rgba(12,36,51,0.08)" }}>
 					<CardContent sx={{ p: { xs: 3, md: 5 } }}>
 						<Stack spacing={1}>
-							<Breadcrumbs aria-label="breadcrumbs">
+							<Breadcrumbs aria-label="breadcrumbs" sx={{ flexWrap: "wrap" }}>
 								<Link href="/" style={{ color: "inherit" }}>
 									Home
 								</Link>
