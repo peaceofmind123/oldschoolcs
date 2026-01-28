@@ -67,15 +67,22 @@ export default function AboutPage() {
 									I translate dense computer science stories into simple experiences—pairing systems thinking with editorial visuals for founders,
 									research labs, and global teams.
 								</Typography>
-								<Stack direction="row" spacing={2} alignItems="center" pt={2}>
-									<Button variant="contained" color="primary" endIcon={<ArrowForwardIcon />}>
+								<Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems={{ xs: "stretch", sm: "center" }} pt={2}>
+									<Button variant="contained" color="primary" endIcon={<ArrowForwardIcon />} fullWidth>
 										View work
 									</Button>
-									<Button variant="outlined" color="inherit" endIcon={<MailOutlineIcon />} component={Link} href="mailto:hello@oldschoolcs.com">
+									<Button
+										variant="outlined"
+										color="inherit"
+										endIcon={<MailOutlineIcon />}
+										component={Link}
+										href="mailto:hello@oldschoolcs.com"
+										fullWidth
+									>
 										Contact me
 									</Button>
 								</Stack>
-								<Stack direction="row" spacing={2} pt={1}>
+								<Stack direction="row" spacing={2} pt={1} flexWrap="wrap">
 									<InstagramIcon fontSize="large" />
 									<LinkedInIcon fontSize="large" />
 								</Stack>
@@ -142,7 +149,7 @@ export default function AboutPage() {
 											</Button>
 										)}
 										{item.metrics && (
-											<Stack direction="row" spacing={4} sx={{ mt: 3 }}>
+											<Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ mt: 3 }}>
 												{item.metrics.map((metric) => (
 													<Box key={metric.label}>
 														<Typography variant="h4" fontWeight={700}>

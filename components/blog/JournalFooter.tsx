@@ -8,7 +8,11 @@ export function JournalFooter() {
 					sx={{
 						display: "grid",
 						gap: { xs: 3, md: 4 },
-						gridTemplateColumns: { xs: "repeat(2, minmax(0, 1fr))", md: "minmax(0, 2fr) repeat(4, minmax(0, 1fr))" }
+						gridTemplateColumns: {
+							xs: "1fr",
+							sm: "repeat(2, minmax(0, 1fr))",
+							md: "minmax(0, 2fr) repeat(4, minmax(0, 1fr))"
+						}
 					}}
 				>
 					<Box sx={{ gridColumn: { xs: "1 / -1", md: "auto" } }}>
